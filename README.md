@@ -22,7 +22,7 @@ composer require waitmoonman/easy-extends
 ## Usage
 
 ```php
-// CLI => install redis
+// CLI => install redis 第一次安装可能会出错，再执行一次便可
 php install.php redis
 ```    
 

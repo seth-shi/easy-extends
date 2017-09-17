@@ -12,13 +12,12 @@
     // 注册助手函数
     require ROOT_PATH . '/Kernel/helper.php';
 
-    phpinfo();exit();
     // 获取本机的配置项目
     $extend = $app->make('redis');
 
     if (! $extend->hasExtend($extend))
     {
-        exit('没有适配你环境的扩展包！');
+        exit('There is no extension package that matches your environment！');
     }
 
     // 下载扩展包
