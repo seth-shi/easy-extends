@@ -14,7 +14,7 @@ class Extendtion
     // 下载的文件名
     protected $fileName;
     // 下载到那个路径
-    protected $cachePath = ROOT_PATH . '/cache/extends/';
+    protected $cachePath = '';
     // dll 文件名
     protected $dllName = '';
 
@@ -34,12 +34,15 @@ class Extendtion
     {
         if (! is_null($key))
         {
-            $this->extendKey = $key;
+            $this->extendKey = strtolower($key);
         }
 
-        // 判断是否开启了 allow_url_open TODO
+        // 判断是否开启了 allow_url_open
         $url = $this->mapUrl[$this->extendKey];
+
+        // 初始化
         $this->fileName = basename($url);
+        $this->cachePath = app()->getBasePath() . '/cache/extends/';
 
         if (! is_dir($this->cachePath))
         {
@@ -52,6 +55,7 @@ class Extendtion
 
     public function installExtend()
     {
+        // zip 文件目录
         $zip_file = $this->cachePath . $this->fileName;
         // 先拼接出压缩文件的名字
         $this->unzip($zip_file, $this->cachePath);
@@ -59,8 +63,10 @@ class Extendtion
         // 如果没有什么问题的话， 会有一个 php_extend.dll
         $extPath = app('config')->getExtPath();
 
+        // 放到 php 扩展目录
         $new_path = $extPath . '/' . $this->dllName;
 
+        // 如果已经加载了扩展，会复制失败。
         if (copy($this->cachePath . $this->dllName, $new_path))
         {
             echo 'installl complete';

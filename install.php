@@ -32,6 +32,7 @@
         exit($e->getMessage());
     }
 
+
     // 调用扩展自身的下载方式
     if (! $extend->hasExtend($config))
     {

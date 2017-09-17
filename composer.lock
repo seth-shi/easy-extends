@@ -4,48 +4,12 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0faa875f1e588ce7b643007c648889fe",
-    "packages": [
-        {
-            "name": "piwik/ini",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/piwik/component-ini.git",
-                "reference": "f1b966240521f45e6c4ef531dfb3446788dbf315"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/piwik/component-ini/f1b966240521f45e6c4ef531dfb3446788dbf315.zip",
-                "reference": "f1b966240521f45e6c4ef531dfb3446788dbf315",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "athletic/athletic": "0.1.*",
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Piwik\\Ini\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0"
-            ],
-            "time": "2017-09-10 12:44:09"
-        }
-    ],
+    "content-hash": "3eb8504edd02838d395a270a5822b56f",
+    "packages": [],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "piwik/ini": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

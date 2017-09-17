@@ -126,7 +126,8 @@ class Config
         // 往 $parent 节点插入一个值 这和 $var[] 的行为不同，后者会新建一个数组。
         $this->iniConfig[$parent][$extendName] = $extendValue;
 
-        $writer->writeToFile($this->extPath . '/php.ini', $this->iniConfig);
+        // php.ini 文件路径
+        $writer->writeToFile($this->phpIniPath, $this->iniConfig);
     }
 
 

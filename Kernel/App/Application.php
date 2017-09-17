@@ -135,4 +135,9 @@ class Application
     {
         return self::$instance;
     }
+
+    public function getBasePath()
+    {
+        return $this->basePath;
+    }
 }
