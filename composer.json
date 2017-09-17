@@ -12,6 +12,12 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": ">=5.3"
+        "php": ">=5.3",
+        "piwik/ini": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kernel\\": "Kernel/"
+        }
     }
 }

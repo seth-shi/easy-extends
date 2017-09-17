@@ -2,141 +2,137 @@
 
 namespace Kernel\App;
 
+use Closure;
 use Kernel\App\Exception\ApplicationException;
+use Kernel\App\Util\Config;
 
-class Application extends Base
+/**
+ * 只能绑定单例简单容器
+ * Class Application
+ * @package Kernel\App
+ */
+class Application
 {
-    // PHP 版本
-    private $phpVersion;
-    // NTS 版本
-    private $ntsVersion;
-    // VC  版本
-    private $vcVersion;
-    // win 版本
-    private $winVersion;
-    // 扩展目录
-    private $extDir;
-    // php.ini 的文件路径
-    private $iniPath;
+    // 版本号
+    const VERSION = '1.1.1';
+    // 根目录
+    private $basePath;
+
+    // 扩展 maps
+    private $extendMaps = array();
+    // 绑定的闭包
+    private $binds = array();
+    // 实例
+    private $instances = array();
+    // 自身静态实例
+    private static $instance;
+
     
-    
-    public function __construct()
+    public function __construct($basePath)
     {
-        // 注册常用配置
-        $this->initBaseInfo();
+        $basePath = str_replace('\\', '/', $basePath);
 
+        // 把自己也注册进去
+        self::$instance = $this;
+        $this->instances[] = $this;
 
-    }
+        // 网站根目录
+        $this->basePath = $basePath;
 
+        // 注册所有扩展列表
+        $this->initAllExtendList();
 
-    public function initBaseInfo()
-    {
-        $config = $this->getPHPInfoArray();
-        
-        // Architecture == X86
-        if (! array_key_exists('Architecture', $config))
-        {
-            throw new ApplicationException('phpinfo 中的 Architecture 信息异常');
-        }
+        // 注册基本服务
+        $this->regisBaseServer();
 
-        // PHP Extension Build
-        if (! array_key_exists('PHP Extension Build', $config))
-        {
-            throw new ApplicationException('phpinfo 中的 PHP Extension Build 信息异常');
-        }
-
-        // 注册进属性
-        $this->winVersion = $config['Architecture'];
-        // 格式总是这样的 API20151012,NTS,VC14 后面两个是用到的
-        $attr = explode(',', $config['PHP Extension Build']);
-        $this->ntsVersion = $attr[1];
-        $this->vcVersion = $attr[2];
-        // PHP 版本
-        $phpVersion = phpversion();
-        $this->phpVersion = (false !== $phpVersion) ? $phpVersion : PHP_VERSION;
-
-        // 扩展和php.ini 目录
-        $this->extDir = ini_get('extension_dir');
-        $this->iniPath = php_ini_loaded_file();
     }
 
 
     /**
-     * 获取 PHP 信息
-     * @return array
-     * @throws ApplicationException
+     * 把闭包放入一个绑定数组
+     * @param $abstract
+     * @param $concrete
      */
-    public function getPHPInfoArray()
+    public function bind($abstract, $concrete)
     {
-        // 通过缓冲区函数，获取信息
-        ob_start();
-        phpinfo(INFO_GENERAL);
-        $phpinfo = ob_get_clean();
-
-        // 保留 tr td 标签
-        $phpinfo = strip_tags($phpinfo, "<tr><td>");
-
-        // 正则匹配出来所有用的标签
-        preg_match_all('/<td class="e">([\w\W]+)<\/td><td class="v">([\w\W]+)<\/td>/U', $phpinfo, $config);
-
-        // 取出多余的空格
-        $config[1] = array_map('trim', $config[1]);
-        $config[2] = array_map('trim', $config[2]);
-
-        // 根据 phpinfo() 的信息合并成键值对数组
-        $config = array_combine($config[1], $config[2]);
-
-        if (empty($config))
+        if ($concrete instanceof Closure)
         {
-            throw new ApplicationException('phpinfo 信息异常');
+            $this->binds[$abstract] = $concrete;
+        }
+        elseif (is_object($concrete))
+        {
+            $this->instances[$abstract] = $concrete;
+        }
+        else
+        {
+            throw new ApplicationException('绑定错误');
+        }
+    }
+
+    /**
+     * 核心方法，安装扩展
+     * @param $entendName
+     */
+    public function make($abstract, $parameters = array())
+    {
+        // 转成小写，防止差错
+        $abstract = strtolower($abstract);
+
+        // 直接实例化扩展对象
+        if (array_key_exists($abstract, $this->extendMaps))
+        {
+            return new $this->extendMaps[$abstract];
         }
 
-        return $config;
+
+        if (! array_key_exists($abstract, $this->instances))
+        {
+            if (! array_key_exists($abstract, $this->binds))
+            {
+                throw new ApplicationException("不存在 [{$abstract}] 实例");
+            }
+
+            // 调用闭包生成实例
+            $this->instances[$abstract] = call_user_func_array($this->binds[$abstract], $parameters);
+        }
+
+        return $this->instances[$abstract];
     }
 
-    public function getRunMode()
-    {
-        // php_sapi_name(), PHP_SAPI
-    }
 
     /**
-     * 拼接名字做为 key 返回
+     * 注册所有扩展列表
      */
-    public function getExtendTypeAsKey()
+    private function initAllExtendList()
     {
-        // map 的 key 拼接形式，(PHP_VERSION)-(IS_NTS)-(VC_VERSION)-(WIN_VERSION)
-        return "{$this->getPHPVersion()}-{$this->getNtsType()}-{$this->getVCVersion()}-{$this->getWinVersion()}";
+        $this->extendMaps = require $this->basePath . '/Kernel/App/Config/ExtendProviders.php';
     }
+
 
     /**
-     * 获取 PHP 版本
-     * @return string
+     * 注册基本服务
      */
-    public function getPHPVersion()
+    private function regisBaseServer()
     {
-        $version = phpversion();
-
-        return (false !== $version) ? $version : PHP_VERSION;
+        // 注册配置
+        $this->bind('config', function(){
+            return new Config();
+        });
     }
 
-    public function getNtsType()
-    {
-        return '';
-    }
-
-    public function getVCVersion()
-    {
-        return '';
-    }
-
-    public function getWinVersion()
-    {
-        return '';
-    }
 
     // 取出多余的斜杆
     private function normalize($service)
     {
         return is_string($service) ? ltrim($service, '\\ ') : $service;
+    }
+
+    /**
+     * 获取自身实例
+     * @return Application
+     */
+    public static function getInstance()
+    {
+        return self::$instance;
     }
 }
