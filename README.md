@@ -28,6 +28,7 @@
 * mssql
 * pdo-mssql
 * rollback
+
 ## Requirement
 1. PHP >= 5.3
 
@@ -43,8 +44,11 @@ composer require waitmoonman/easy-extends
 ```php
 // 在根目录打开命令行窗口, 执行一下命令安装 redis 扩展
 php install redis
+// 安装好了之后， 请重启服务器再查看, 也可以使用 phpinfo(); 函数
+php index
+
 // 如果写入失败, 请回滚 php.ini 文件
-php install rollback
+// php install rollback
 ```    
 
 ## License
