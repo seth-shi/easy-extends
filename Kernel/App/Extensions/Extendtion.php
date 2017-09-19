@@ -73,7 +73,7 @@ class Extendtion
         }
         else
         {
-            echo 'install fail';
+            echo 'install fail: extend already running';
         }
 
         // 删除文件

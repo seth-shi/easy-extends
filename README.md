@@ -6,6 +6,7 @@
     - 一键安装PHP扩展
     - 命令行安装
     - 界面安装
+    - 回滚 php.ini 文件
 
 ## Requirement
 
@@ -24,6 +25,8 @@ composer require waitmoonman/easy-extends
 ```php
 // CLI => install redis 第一次安装可能会出错，再执行一次便可
 php install.php redis
+// 如果写入失败, 请回滚 php.ini 文件
+php install.php rollback
 ```    
 
 ## License

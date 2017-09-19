@@ -5,6 +5,7 @@ namespace Kernel\App\Util;
 
 
 use Kernel\App\Exception\ConfigException;
+use Kernel\App\Extensions\Extendtion;
 
 class Config
 {
@@ -25,7 +26,7 @@ class Config
     // 配置
     protected $iniConfig;
     // 关闭的配置
-    protected $offConfig = array('False' => true, 'Off' => 'On', '' => '手动配置');
+    protected $offConfig = array('False' => true, 'Off' => 'On', '' => 'handler config');
 
     /**
      * 注册基础配置
@@ -156,13 +157,13 @@ class Config
         // Architecture == X86
         if (! array_key_exists('Architecture', $config))
         {
-            throw new ConfigException('phpinfo 中的 Architecture 信息异常');
+            throw new ConfigException('phpinfo Architecture information exception');
         }
 
         // PHP Extension Build
         if (! array_key_exists('PHP Extension Build', $config))
         {
-            throw new ConfigException('phpinfo 中的 PHP Extension Build 信息异常');
+            throw new ConfigException('phpinfo PHP Extension Build information exception');
         }
 
         // 注册进属性
@@ -233,7 +234,7 @@ class Config
 
         if (empty($config))
         {
-            throw new ConfigException('phpinfo 信息异常');
+            throw new ConfigException('phpinfo Extendtion');
         }
 
         return $config;
@@ -251,10 +252,22 @@ class Config
     }
 
 
-
+    /**
+     * 获取扩展目录
+     * @return string
+     */
     public function getExtPath()
     {
         return $this->extPath;
+    }
+
+    /**
+     * 获取 php.ini 路径
+     * @return string
+     */
+    public function getphpIniPath()
+    {
+        return $this->phpIniPath;
     }
 
 }

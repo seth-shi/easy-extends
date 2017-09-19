@@ -45,6 +45,8 @@ class Application
         // 注册基本服务
         $this->regisBaseServer();
 
+        // 备份 php.ini 文件
+        $this->backup();
     }
 
 
@@ -105,7 +107,10 @@ class Application
      */
     private function initAllExtendList()
     {
+        // 注册所有扩展列表
         $this->extendMaps = require $this->basePath . '/Kernel/App/Config/ExtendProviders.php';
+        // 助手函数
+        require $this->basePath . '/Kernel/helper.php';
     }
 
 
@@ -120,12 +125,28 @@ class Application
         });
     }
 
+    private function backup()
+    {
+        $phpiniPath = $this->make('config')->getphpIniPath();
+        $backupPath = $phpiniPath . '.bak';
+
+        // 如果不存在备份文件， 就备份一次
+        if (! is_file($backupPath))
+        {
+            if (! copy($phpiniPath, $backupPath))
+            {
+                exit('please backup php.ini for php.ini.bak');
+            }
+        }
+    }
+
 
     // 取出多余的斜杆
     private function normalize($service)
     {
         return is_string($service) ? ltrim($service, '\\ ') : $service;
     }
+
 
     /**
      * 获取自身实例
@@ -136,6 +157,10 @@ class Application
         return self::$instance;
     }
 
+    /**
+     * 获取根路径
+     * @return mixed
+     */
     public function getBasePath()
     {
         return $this->basePath;

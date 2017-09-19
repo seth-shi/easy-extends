@@ -9,12 +9,10 @@
 
     $app = new \Kernel\App\Application(ROOT_PATH);
 
-    // 注册助手函数
-    require ROOT_PATH . '/Kernel/helper.php';
-
     // 获取本机的配置项目
     $extend = $app->make('redis');
 
+    // 是否有适合这个 PHP NTS VC WIN 版本的扩展包
     if (! $extend->hasExtend($extend))
     {
         exit('There is no extension package that matches your environment！');
