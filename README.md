@@ -1,7 +1,7 @@
 # WaitMoonMan/EasyExtends
 
 ## 一键简易安装PHP扩展
-
+![redis一键安装](http://or2pofbfh.bkt.clouddn.com/github/easy-extends.gif)
 ## Feature
     - 一键安装PHP扩展
     - 命令行安装
