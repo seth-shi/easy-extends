@@ -28,9 +28,7 @@
 * pdo-mssql
 * rollback
 ## Requirement
-
 1. PHP >= 5.3
-
 
 
 ## Installation

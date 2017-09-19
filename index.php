@@ -1,5 +1,6 @@
 <?php
 
+// 命令行打印所有扩展
 if (php_sapi_name() === 'cli')
 {
     print_r(get_loaded_extensions(true));
