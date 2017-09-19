@@ -2,7 +2,7 @@
 /**
  * 引用 Piwik - free/libre analytics platform 的包
  *
- * 读的时候，自动转换成bool值，不符合实际情况，稍加修改
+ * 读的时候，自动转换成bool值，不符合实际情况，稍加修改,读取的时候有多个 extends 多个键值会被覆盖
  */
 
 namespace Kernel\App\Util;
@@ -79,30 +79,10 @@ class IniReader
         // See http://3v4l.org/jD1Lh
         $ini .= "\n";
 
-        if ($this->useNativeFunction) {
-            $array = $this->readWithNativeFunction($ini);
-        } else {
-            $array = $this->readWithAlternativeImplementation($ini);
-        }
 
-        return $array;
-    }
+        // 不能用默认的 parse_ini_file 文件解析，因为配置文件中有多个 extend
+        $array = $this->readWithAlternativeImplementation($ini);
 
-    /**
-     * @param string $ini
-     * @throws ConfigException
-     * @return array
-     */
-    private function readWithNativeFunction($ini)
-    {
-        // We cannot use INI_SCANNER_RAW by default because it is buggy under PHP 5.3.14 and 5.4.4
-        // http://3v4l.org/m24cT
-        $array = @parse_ini_string($ini, true, INI_SCANNER_RAW);
-
-        if ($array === false) {
-            $e = error_get_last();
-            throw new ConfigException('Syntax error in INI configuration: ' . $e['message']);
-        }
 
         return $array;
     }
@@ -159,10 +139,12 @@ class IniReader
             if (strpos($line, '[') === 0) {
                 $tmp = explode(']', $line);
                 $section = trim(substr($tmp[0], 1));
+
                 $descriptions[$section] = array();
                 $lastComment = '';
                 continue;
             }
+
 
             if (!preg_match('/^[a-zA-Z0-9[]/', $line)) {
                 if (strpos($line, ';') === 0) {
@@ -212,6 +194,7 @@ class IniReader
     {
         $ini = $this->splitIniContentIntoLines($ini);
 
+
         if (count($ini) == 0) {
             return array();
         }
@@ -221,16 +204,20 @@ class IniReader
         $result = array();
         $globals = array();
         $i = 0;
+
+        $ss = 1;
         foreach ($ini as $line) {
             $line = trim($line);
             $line = str_replace("\t", " ", $line);
+
 
             // Comments
             if (!preg_match('/^[a-zA-Z0-9[]/', $line)) {
                 continue;
             }
 
-            // Sections
+
+            // Sections 模块
             if ($line{0} == '[') {
                 $tmp = explode(']', $line);
                 $sections[] = trim(substr($tmp[0], 1));
@@ -240,8 +227,12 @@ class IniReader
 
             // Key-value pair
             list($key, $value) = explode('=', $line, 2);
+
             $key = trim($key);
             $value = trim($value);
+
+
+
             if (strstr($value, ";")) {
                 $tmp = explode(';', $value);
                 if (count($tmp) == 2) {
@@ -264,18 +255,22 @@ class IniReader
 
             $value = trim($value);
 
+
             // Special keywords
+            /*  不需要特殊的标记
             if ($value === 'true' || $value === 'yes' || $value === 'on') {
-                $value = true;
+                $value = yes;
             } elseif ($value === 'false' || $value === 'no' || $value === 'off') {
                 $value = false;
             } elseif ($value === '' || $value === 'null') {
                 $value = null;
             }
+            */
 
             if (is_string($value)) {
                 $value = trim($value, "'\"");
             }
+
 
             if ($i == 0) {
                 if (substr($key, -2) == '[]') {
@@ -287,12 +282,49 @@ class IniReader
                 if (substr($key, -2) == '[]') {
                     $values[$i - 1][substr($key, 0, -2)][] = $value;
                 } else {
-                    $values[$i - 1][$key] = $value;
+
+                    // ！！！当有重复的 key 时，在后面加#直至没有重复
+                    $flag_count = 0;
+                    $tmp_key = $key;
+                    do
+                    {
+                        if (! isset($values[$i - 1]))
+                        {
+                            $values[$i - 1] = array();
+                        }
+
+
+                        if (array_key_exists($tmp_key, $values[$i - 1]))
+                        {
+                            // 每次进来加一个 #
+                            ++ $flag_count;
+                            $tmp_key = $key . str_repeat('#', $flag_count);
+                        }
+                        else
+                        {
+                            // 出去的时候，如果 flag_count 不是0 要重新赋值带有 # 的key 给它
+                            if ($flag_count != 0)
+                            {
+                                $key = $tmp_key;
+                            }
+
+                            // 如果没有重复就直接退出
+                            $flag_count = false;
+                        }
+
+                    } while($flag_count);
+
                 }
             }
+
+
+            $values[$i - 1][$key] = $value;
         }
 
+
+        // 把索引数组转换成关联数组
         for ($j = 0; $j < $i; $j++) {
+
             if (isset($values[$j])) {
                 $result[$sections[$j]] = $values[$j];
             } else {
@@ -301,7 +333,6 @@ class IniReader
         }
 
         $finalResult = $result + $globals;
-
 
         return $finalResult;
     }

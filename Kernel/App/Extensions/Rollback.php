@@ -2,6 +2,8 @@
 
 namespace Kernel\App\Extensions;
 
+use Kernel\App\Common\Extendtion;
+
 class Rollback extends Extendtion
 {
     private $phpiniPath = '';

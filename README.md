@@ -8,6 +8,11 @@
     - 界面安装
     - 回滚 php.ini 文件
 
+
+# Extended Support
+* redis
+* memecache
+* rollback
 ## Requirement
 
 1. PHP >= 5.3

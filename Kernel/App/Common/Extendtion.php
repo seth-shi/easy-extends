@@ -1,11 +1,17 @@
 <?php
 
-namespace Kernel\App\Extensions;
+namespace Kernel\App\Common;
 
-
+use Kernel\App\Exception\ConfigException;
 use Kernel\App\Http\Request;
 
-class Extendtion
+
+/**
+ * 需要下载安装的扩展继承这个类
+ * Class Extendtion
+ * @package Kernel\App\Common
+ */
+class Extendtion implements ExtendtionInterface
 {
     protected $mapUrl = array();
 
@@ -30,6 +36,10 @@ class Extendtion
         return array_key_exists($this->extendKey, $this->mapUrl);
     }
 
+    /**
+     * 下载扩展
+     * @param null $key
+     */
     public function downloadExtend($key = null)
     {
         if (! is_null($key))
@@ -37,7 +47,7 @@ class Extendtion
             $this->extendKey = strtolower($key);
         }
 
-        // 判断是否开启了 allow_url_open
+        // 获取对应的URL
         $url = $this->mapUrl[$this->extendKey];
 
         // 初始化
@@ -53,6 +63,9 @@ class Extendtion
         (new Request())->download($url, $this->cachePath);
     }
 
+    /**
+     * 安装扩展
+     */
     public function installExtend()
     {
         // zip 文件目录
@@ -69,21 +82,50 @@ class Extendtion
         // 如果已经加载了扩展，会复制失败。
         if (copy($this->cachePath . $this->dllName, $new_path))
         {
-            echo 'installl complete';
+            echo "installl complete\n";
         }
         else
         {
-            echo 'install fail: extend already running';
+            echo "install fail: extend already running\n";
         }
 
         // 删除文件
-        $this->deldir($this->cachePath);
+        $this->delDir($this->cachePath);
 
-        // 打开扩展extension=php_bz2.dll
-        app('config')->openExtend('extension', $this->dllName);
+
+        // 开启扩展
+        $this->openExtend();
     }
 
 
+    /**
+     * 开启扩展
+     */
+    protected function openExtend()
+    {
+        // 开启成功直接输出， 失败直接抛出异常
+        try
+        {
+            // 打开扩展如果，返回false代表是已经打开了，否则则修改了 php.ini 文件，然后重启服务器
+            app('config')->openExtend('extension', $this->dllName);
+            echo "open extend complete \n";
+        }
+        catch (ConfigException $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+
+
+    /**
+     * 解压文件
+     * @param $src_file
+     * @param bool $dest_dir
+     * @param bool $create_zip_name_dir
+     * @param bool $overwrite
+     * @return bool
+     *
+     */
     public function unzip($src_file, $dest_dir=false, $create_zip_name_dir=true, $overwrite=true){
 
         if ($zip = zip_open($src_file)){
@@ -134,7 +176,12 @@ class Extendtion
         return true;
     }
 
-    public function deldir($dir) {
+    /**
+     * 删除目录
+     * @param $dir
+     * @return bool
+     */
+    public function delDir($dir) {
         //先删除目录下的文件：
         $dh=opendir($dir);
         while ($file=readdir($dh)) {
@@ -143,7 +190,7 @@ class Extendtion
                 if(!is_dir($fullpath)) {
                     unlink($fullpath);
                 } else {
-                    deldir($fullpath);
+                    $this->delDir($fullpath);
                 }
             }
         }
@@ -157,6 +204,10 @@ class Extendtion
         }
     }
 
+    /**
+     * 创建目录
+     * @param $path
+     */
     public function createDirs($path){
         if (!is_dir($path)){
             $directory_path = "";

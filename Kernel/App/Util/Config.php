@@ -122,9 +122,33 @@ class Config
      */
     private function writeExtendConfg($extendName, $extendValue, $parent = 'PHP')
     {
-        $writer = new IniWriter();
+        // 这里读取的时候，需要判断一下是否存在
+        $flag_count = 0;
+        $tmp_key = $extendName;
+        do
+        {
+            if (array_key_exists($tmp_key, $this->iniConfig[$parent]))
+            {
+                // 每次进来加一个 #
+                ++ $flag_count;
+                $tmp_key = $extendName . str_repeat('#', $flag_count);
+            }
+            else
+            {
+                // 出去的时候，如果 flag_count 不是0 要重新赋值带有 # 的key 给它
+                if ($flag_count != 0)
+                {
+                    $extendName = $tmp_key;
+                }
+                // 如果没有重复就直接退出
+                $flag_count = false;
+            }
 
-        // 往 $parent 节点插入一个值 这和 $var[] 的行为不同，后者会新建一个数组。
+        } while($flag_count);
+
+
+        $writer = new IniWriter();
+        // 往 $parent 节点插入一个值 这和 $var[] 的行为不同，后者会新建一个数组。  TODO
         $this->iniConfig[$parent][$extendName] = $extendValue;
 
         // php.ini 文件路径

@@ -1,9 +1,9 @@
 <?php
+
 /**
- * Piwik - free/libre analytics platform
+ * 引用 Piwik - free/libre analytics platform 的包
  *
- * @link http://piwik.org
- * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
+ * 读的时候，自动转换成bool值，不符合实际情况，稍加修改,读取的时候有多个 extends 多个键值会被覆盖
  */
 
 namespace Kernel\App\Util;
@@ -88,7 +88,9 @@ class IniWriter
 
             $ini .= "[$sectionName]\n";
 
+            // 这里是
             foreach ($section as $option => $value) {
+
                 if (is_numeric($option)) {
                     $option = $sectionName;
                     $value = array($value);
@@ -99,6 +101,9 @@ class IniWriter
                         $ini .= $option . '[] = ' . $this->encodeValue($currentValue) . "\n";
                     }
                 } else {
+                    // 这里修改一下， extends 多个的时候，在读取的时候加了 #
+                    $option = rtrim($option, '#');
+
                     $ini .= $option . ' = ' . $this->encodeValue($value) . "\n";
                 }
             }

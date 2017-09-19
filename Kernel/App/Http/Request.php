@@ -9,6 +9,11 @@ use Kernel\App\Util\Config;
 class Request
 {
 
+    /**
+     * 下载文件
+     * @param $url
+     * @param $newPath
+     */
     public function download($url, $newPath)
     {
         if (false === $this->hasAllowUrlFopenExtend())

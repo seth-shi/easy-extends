@@ -8,7 +8,9 @@
 
     define('ROOT_PATH', __DIR__);
 
-
+    // 显示错误
+    ini_set("display_errors", "On");
+    error_reporting(E_ALL | E_STRICT);
 
     // 注册自动加载
     require ROOT_PATH . '/Kernel/AutoLoad.php';
@@ -29,11 +31,10 @@
         exit($e->getMessage());
     }
 
-
     // 调用扩展自身的下载方式
     if (! $extend->hasExtend($config))
     {
-        exit('There is no extension package that matches your environment！');
+        exit('There is no extension package that matches your environment!');
     }
 
     // 下载扩展包
