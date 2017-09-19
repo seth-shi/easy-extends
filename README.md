@@ -11,7 +11,21 @@
 
 # Extended Support
 * redis
-* memecache
+* memcache
+* xdebug
+* curl
+* openssl
+* mongo
+* mbstring
+* mongodb
+* gd
+* fileinfo
+* mysqli
+* pdo-mysql
+* sockets
+* zip
+* mssql
+* pdo-mssql
 * rollback
 ## Requirement
 
@@ -28,10 +42,10 @@ composer require waitmoonman/easy-extends
 ## Usage
 
 ```php
-// CLI => install redis 第一次安装可能会出错，再执行一次便可
-php install.php redis
+// 在根目录打开命令行窗口, 执行一下命令安装 redis 扩展
+php install redis
 // 如果写入失败, 请回滚 php.ini 文件
-php install.php rollback
+php install rollback
 ```    
 
 ## License
