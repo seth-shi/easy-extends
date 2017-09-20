@@ -29,7 +29,6 @@ github 的 Clone or download 按钮 -> download zip 即可下载压缩包
 composer require waitmoonman/easy-extends
 ```
 ## Usage
-使用前需注册[php环境变量](http://blog.shiguopeng.cn/article/10201.html)
 ```php
 // 使用格式
 php install xxxx
@@ -60,5 +59,12 @@ php install rollback
 * mssql
 * pdo-mssql
 * rollback
+## Errors
+* php 既不是内部命令也不知可执行程序
+    * 需注册[php环境变量](http://blog.shiguopeng.cn/article/10201.html)
+* fwrite 写入失败
+    * 需要给`\cache`文件夹配置读写权限，windows通常情况下默认是有的
+* xxxx.dll already run
+    * 已经安装了此扩展，且已在运行
 ## License
 MIT

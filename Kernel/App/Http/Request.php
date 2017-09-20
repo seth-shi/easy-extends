@@ -34,6 +34,14 @@ class Request
         $file_name = basename($url);
         $newFile = fopen("{$newPath}/{$file_name}", 'w+');
 
+
+        // 如果权限不足，直接退出程序
+        if (! $newFile)
+        {
+            exit("{$newPath} 目录创建失败");
+        }
+
+
         if (app('config')->getRunMode() === 'cli')
         {
             // 计算大小
