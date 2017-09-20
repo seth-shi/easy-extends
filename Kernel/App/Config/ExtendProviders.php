@@ -1,6 +1,6 @@
 <?php
 
-    // 5.3 版本不支持 '\Kernel\App\Extensions'
+    // 5.3 版本不支持 '\Kernel\App\Extensions::class'
     return array(
         'redis'     => '\Kernel\App\Extensions\Redis',
         'memcache'  => '\Kernel\App\Extensions\Memcache',

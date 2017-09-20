@@ -3,6 +3,10 @@
 
 class AutoLoad
 {
+    /**
+     * 自动加载核心方法
+     * @param $class
+     */
     public static function loaded($class)
     {
         // 目录
@@ -21,6 +25,11 @@ class AutoLoad
         }
     }
 
+    /**
+     * 去掉多余的符号
+     * @param $string
+     * @return mixed|string
+     */
     protected static function normalize($string)
     {
         // 转小写 去掉分隔符

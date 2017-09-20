@@ -13,10 +13,3 @@ if (! function_exists('app'))
         return \Kernel\App\Application::getInstance()->make($make, $parameters);
     }
 }
-
-if (! function_exists('config'))
-{
-    function config()
-    {
-    }
-}
