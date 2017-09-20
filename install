@@ -1,26 +1,17 @@
 #!/usr/bin/env php
 <?php
-
-    if ($argc !== 2)
-    {
-        exit ('php install extend_name');
-    }
-
     define('ROOT_PATH', __DIR__);
-
-    // 显示错误
-    ini_set("display_errors", "On");
-    error_reporting(E_ALL | E_STRICT);
 
     // 注册自动加载
     require ROOT_PATH . '/Kernel/AutoLoad.php';
     spl_autoload_register('\AutoLoad::loaded');
 
+    // 实例化 app 实例
     $app = new \Kernel\App\Application(ROOT_PATH);
 
     try
     {
-        // 获取本机的配置项目
+        // 获取本机的相关配置
         $config = $app->make('config')->getExtendTypeAsKey();
 
         // 获取需要下载的扩展实例
@@ -31,7 +22,7 @@
         exit($e->getMessage());
     }
 
-    // 调用扩展自身的下载方式
+    // 是否有符合本机配置的扩展
     if (! $extend->hasExtend($config))
     {
         exit('There is no extension package that matches your environment!');

@@ -1,7 +1,9 @@
-# WaitMoonMan/EasyExtends
-
+# WaitMoonMan/easy-extends
+![语言](https://img.shields.io/badge/language-php-green.svg)
+![协议](https://img.shields.io/badge/license-MIT-008800.svg)
+[![博客](https://img.shields.io/badge/blog-@waitmoonman-blue.svg)](https://waitmoonman.github.io/)
+[![下载](https://img.shields.io/badge/download-link-0000aa.svg)]()
 ## About
-![redis一键安装](http://or2pofbfh.bkt.clouddn.com/github/easy_extends_down_redis.gif)
 ```
 +--------------+                    +----------------+            +------------+
 | open service | php install redis  | down redis.dll | php index  |    show    |
@@ -19,13 +21,13 @@
 
 ## Installation
 ```shell
+// 手动下载
+// composer安装
 composer require waitmoonman/easy-extends
 ```
 ## Usage
+使用前需注册[php环境变量](http://blog.shiguopeng.cn/article/10201.html)
 ```php
-/**
- * 在根目录打开命令行窗口, 需要有 PHP 环境 (在命令行下输入 php -v 可执行便是成功)
- */
 // 使用格式
 php install xxxx
 
