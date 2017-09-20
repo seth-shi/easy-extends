@@ -38,7 +38,7 @@ class Request
         // 如果权限不足，直接退出程序
         if (! $newFile)
         {
-            exit("{$newPath} 目录创建失败");
+            exit("{$newPath} dir create fail");
         }
 
 
