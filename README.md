@@ -20,10 +20,10 @@
 1. PHP >= 5.3
 
 ## Installation
+[easy-extends压缩包](https://github.com/waitmoonman/easy-extends/archive/master.zip)
 ```shell
 // 手动下载
 github 的 Clone or download 按钮 -> download zip 即可下载压缩包
-[easy-extends压缩包](https://github.com/waitmoonman/easy-extends/archive/master.zip)
 
 // composer安装
 composer require waitmoonman/easy-extends
