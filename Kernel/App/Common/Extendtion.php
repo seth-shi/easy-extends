@@ -87,6 +87,8 @@ class Extendtion implements ExtendtionInterface
         else
         {
             echo "install fail: extend already running\n";
+            // 需要停止运行， 不要重复打开扩展
+            eixt();
         }
 
         // 删除文件
