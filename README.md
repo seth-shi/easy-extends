@@ -52,10 +52,14 @@ php install rollback
 * fileinfo
 * mysqli
 * pdo-mysql
+* pdo-mssql
+* pdo-sqlite
 * sockets
 * zip
 * mssql
-* pdo-mssql
+* solr
+* ssh2
+
 * rollback
 ## Errors
 * php 既不是内部命令也不知可执行程序
