@@ -40,25 +40,25 @@ php index
 php install rollback
 ```    
 ## Support
-* redis
-* memcache
-* xdebug
 * curl
-* openssl
-* mongo
-* mbstring
-* mongodb
-* gd
 * fileinfo
-* mysqli
-* pdo-mysql
+* gd2
 * pdo-mssql
+* pdo-mysql
 * pdo-sqlite
-* sockets
-* zip
+* mbstring
+* memcache
+* mongo
+* mongodb
+* mysqli
 * mssql
+* openssl
+* redis
+* sockets
 * solr
 * ssh2
+* xdebug
+* zip
 
 * rollback
 ## Errors
