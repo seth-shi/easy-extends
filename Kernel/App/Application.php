@@ -16,7 +16,7 @@ use ReflectionException;
 class Application
 {
     // 版本号
-    const VERSION = '1.1.1';
+    const VERSION = '1.1.2';
     // 根目录
     private $basePath;
 
