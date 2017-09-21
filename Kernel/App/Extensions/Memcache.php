@@ -12,6 +12,7 @@ class Memcache extends Extendtion
         '5.6-ts-vc11-x86' => 'http://windows.php.net/downloads/pecl/releases/memcache/3.0.8/php_memcache-3.0.8-5.6-ts-vc11-x86.zip',
         '5.6-nts-vc11-x64' => 'http://windows.php.net/downloads/pecl/releases/memcache/3.0.8/php_memcache-3.0.8-5.6-nts-vc11-x64.zip',
         '5.6-ts-vc11-x64' => 'http://windows.php.net/downloads/pecl/releases/redis/2.2.7/php_redis-2.2.7-5.6-ts-vc11-x64.zip',
+
         '5.5-nts-vc11-x86' => 'http://windows.php.net/downloads/pecl/releases/memcache/3.0.8/php_memcache-3.0.8-5.5-nts-vc11-x86.zip',
         '5.5-ts-vc11-x86' => 'http://windows.php.net/downloads/pecl/releases/memcache/3.0.8/php_memcache-3.0.8-5.5-ts-vc11-x86.zip',
         '5.5-nts-vc11-x64' => 'http://windows.php.net/downloads/pecl/releases/memcache/3.0.8/php_memcache-3.0.8-5.5-nts-vc11-x64.zip',
