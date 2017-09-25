@@ -53,6 +53,7 @@ php install rollback
 * mysqli
 * mssql
 * openssl
+* sphinx
 * redis
 * sockets
 * solr

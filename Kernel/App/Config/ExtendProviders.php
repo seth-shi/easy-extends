@@ -15,6 +15,7 @@
         'mysqli'     => '\Kernel\App\Extensions\Mysqli',
         'mssql'      => '\Kernel\App\Extensions\Sqlsrv',
         'openssl'    => '\Kernel\App\Extensions\Openssl',
+        'sphinx'      => '\Kernel\App\Extensions\Sphinx',
         'redis'      => '\Kernel\App\Extensions\Redis',
         'sockets'    => '\Kernel\App\Extensions\Sockets',
         'solr'       => '\Kernel\App\Extensions\Solr',
