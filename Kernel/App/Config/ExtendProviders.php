@@ -1,6 +1,6 @@
 <?php
 
-    // 5.3 版本不支持 '\Kernel\App\Extensions::class'
+    // 5.3 版本不支持 '\Kernel\App\Extensions::class'  php_imagick.dll
     return array(
         'curl'       => '\Kernel\App\Extensions\Curl',
         'fileinfo'   => '\Kernel\App\Extensions\Fileinfo',
