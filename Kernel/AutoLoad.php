@@ -19,8 +19,7 @@ class AutoLoad
 
         $file = "{$path}/{$file}.php";
 
-        if (is_file($file))
-        {
+        if (is_file($file)) {
             require $file;
         }
     }

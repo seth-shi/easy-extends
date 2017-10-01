@@ -36,19 +36,15 @@ class Rollback extends Extendtion
      */
     public function installExtend()
     {
-        if (! is_file($this->backupPath))
-        {
+        if (!is_file($this->backupPath)) {
             echo "backup file fail: php.ini.bak file not exist\n";
             exit;
         }
 
-        if (copy($this->backupPath, $this->phpiniPath))
-        {
+        if (copy($this->backupPath, $this->phpiniPath)) {
             // 删除备份文件
             echo "rollback complete\n";
-        }
-        else
-        {
+        } else {
             echo "rollback fail\n";
         }
     }

@@ -30,7 +30,7 @@ class ExtendtionNotDownload implements ExtendtionInterface
 
     public function installExtend()
     {
-        exit('please write ExtendsNotDownload');
+        exit('please overwrite ExtendsNotDownload');
     }
 
 }

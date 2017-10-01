@@ -82,7 +82,7 @@ class IniWriter
                 continue;
             }
 
-            if (! is_array($section)) {
+            if (!is_array($section)) {
                 throw new ConfigException(sprintf("Section \"%s\" doesn't contain an array of values", $sectionName));
             }
 
@@ -93,7 +93,9 @@ class IniWriter
 
                 if (is_numeric($option)) {
                     $option = $sectionName;
-                    $value = array($value);
+                    $value  = array(
+                        $value
+                    );
                 }
 
                 if (is_array($value)) {

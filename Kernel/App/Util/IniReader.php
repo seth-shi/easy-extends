@@ -130,18 +130,18 @@ class IniReader
 
         $descriptions = array();
 
-        $section = '';
+        $section     = '';
         $lastComment = '';
 
         foreach ($ini as $line) {
             $line = trim($line);
 
             if (strpos($line, '[') === 0) {
-                $tmp = explode(']', $line);
+                $tmp     = explode(']', $line);
                 $section = trim(substr($tmp[0], 1));
 
                 $descriptions[$section] = array();
-                $lastComment = '';
+                $lastComment            = '';
                 continue;
             }
 
@@ -200,10 +200,10 @@ class IniReader
         }
 
         $sections = array();
-        $values = array();
-        $result = array();
-        $globals = array();
-        $i = 0;
+        $values   = array();
+        $result   = array();
+        $globals  = array();
+        $i        = 0;
 
         $ss = 1;
         foreach ($ini as $line) {
@@ -219,7 +219,7 @@ class IniReader
 
             // Sections 模块
             if ($line{0} == '[') {
-                $tmp = explode(']', $line);
+                $tmp        = explode(']', $line);
                 $sections[] = trim(substr($tmp[0], 1));
                 $i++;
                 continue;
@@ -228,7 +228,7 @@ class IniReader
             // Key-value pair
             list($key, $value) = explode('=', $line, 2);
 
-            $key = trim($key);
+            $key   = trim($key);
             $value = trim($value);
 
 
@@ -236,10 +236,7 @@ class IniReader
             if (strstr($value, ";")) {
                 $tmp = explode(';', $value);
                 if (count($tmp) == 2) {
-                    if ((($value{0} != '"') && ($value{0} != "'")) ||
-                        preg_match('/^".*"\s*;/', $value) || preg_match('/^".*;[^"]*$/', $value) ||
-                        preg_match("/^'.*'\s*;/", $value) || preg_match("/^'.*;[^']*$/", $value)
-                    ) {
+                    if ((($value{0} != '"') && ($value{0} != "'")) || preg_match('/^".*"\s*;/', $value) || preg_match('/^".*;[^"]*$/', $value) || preg_match("/^'.*'\s*;/", $value) || preg_match("/^'.*;[^']*$/", $value)) {
                         $value = $tmp[0];
                     }
                 } else {
@@ -259,11 +256,11 @@ class IniReader
             // Special keywords
             /*  不需要特殊的标记
             if ($value === 'true' || $value === 'yes' || $value === 'on') {
-                $value = yes;
+            $value = yes;
             } elseif ($value === 'false' || $value === 'no' || $value === 'off') {
-                $value = false;
+            $value = false;
             } elseif ($value === '' || $value === 'null') {
-                $value = null;
+            $value = null;
             }
             */
 
@@ -285,26 +282,20 @@ class IniReader
 
                     // ！！！当有重复的 key 时，在后面加#直至没有重复
                     $flag_count = 0;
-                    $tmp_key = $key;
-                    do
-                    {
-                        if (! isset($values[$i - 1]))
-                        {
+                    $tmp_key    = $key;
+                    do {
+                        if (!isset($values[$i - 1])) {
                             $values[$i - 1] = array();
                         }
 
 
-                        if (array_key_exists($tmp_key, $values[$i - 1]))
-                        {
+                        if (array_key_exists($tmp_key, $values[$i - 1])) {
                             // 每次进来加一个 #
-                            ++ $flag_count;
+                            ++$flag_count;
                             $tmp_key = $key . str_repeat('#', $flag_count);
-                        }
-                        else
-                        {
+                        } else {
                             // 出去的时候，如果 flag_count 不是0 要重新赋值带有 # 的key 给它
-                            if ($flag_count != 0)
-                            {
+                            if ($flag_count != 0) {
                                 $key = $tmp_key;
                             }
 
@@ -312,7 +303,7 @@ class IniReader
                             $flag_count = false;
                         }
 
-                    } while($flag_count);
+                    } while ($flag_count);
 
                 }
             }

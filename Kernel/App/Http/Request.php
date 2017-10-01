@@ -16,61 +16,50 @@ class Request
      */
     public function download($url, $newPath)
     {
-        if (false === $this->hasAllowUrlFopenExtend())
-        {
+        if (false === $this->hasAllowUrlFopenExtend()) {
             echo "The allow_url_fopen extension has been opened. Please restart your server\n";
         }
 
         // 获取响应头
         $headers = get_headers($url, 1);
-        if (! $headers)
-        {
+        if (!$headers) {
             echo "Network failure\n";
         }
 
         // 打开两个文件
-        $pf = fopen($url, 'r');
+        $pf        = fopen($url, 'r');
         // 下载的扩展存到临时目录，之后复制到扩展目录
         $file_name = basename($url);
-        $newFile = fopen("{$newPath}/{$file_name}", 'w+');
+        $newFile   = fopen("{$newPath}/{$file_name}", 'w+');
 
 
         // 如果权限不足，直接退出程序
-        if (! $newFile)
-        {
+        if (!$newFile) {
             exit("{$newPath} dir create fail");
         }
 
 
-        if (app('config')->getRunMode() === 'cli')
-        {
+        if (app('config')->getRunMode() === 'cli') {
             // 计算大小
-            $size = $this->formatBytes($headers['Content-Length']);
+            $size      = $this->formatBytes($headers['Content-Length']);
             $down_size = 0;
-            while (! feof($pf))
-            {
+            while (!feof($pf)) {
                 $data = fread($pf, 128);
                 $down_size += fwrite($newFile, $data, 128);
 
-                $count = $down_size/$headers['Content-Length']*50;
+                $count = $down_size / $headers['Content-Length'] * 50;
 
                 $this->formatOutput($count, $this->formatBytes($down_size), $size);
             }
 
             echo "\n";
-            if ($down_size == $headers['Content-Length'])
-            {
+            if ($down_size == $headers['Content-Length']) {
                 echo "download complete\n";
-            }
-            else
-            {
+            } else {
                 echo "download fail\n";
             }
-        }
-        else
-        {
-            while (! feof($pf))
-            {
+        } else {
+            while (!feof($pf)) {
                 $data = fread($pf, 100);
                 fwrite($newFile, $data, 100);
             }
@@ -102,9 +91,15 @@ class Request
      */
     private function formatBytes($size, $delimiter = '')
     {
-        $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB');
-        for ($i = 0; $size >= 1024 && $i < 6; $i++)
-        {
+        $units = array(
+            'B',
+            'KB',
+            'MB',
+            'GB',
+            'TB',
+            'PB'
+        );
+        for ($i = 0; $size >= 1024 && $i < 6; $i++) {
             $size /= 1024;
         }
 
@@ -119,18 +114,13 @@ class Request
     private function hasAllowUrlFopenExtend()
     {
         // 打开 allow_url_fopen 扩展
-        try
-        {
+        try {
             // 打开扩展如果，返回false代表是已经打开了，否则则修改了 php.ini 文件，然后重启服务器
             return app('config')->openExtend('allow_url_fopen', 'On');
         }
-        catch (ConfigException $e)
-        {
+        catch (ConfigException $e) {
             echo $e->getMessage();
         }
     }
-
-
-
 
 }

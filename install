@@ -1,35 +1,32 @@
 #!/usr/bin/env php
 <?php
-    define('ROOT_PATH', __DIR__);
+define('ROOT_PATH', __DIR__);
 
-    // 注册自动加载
-    require ROOT_PATH . '/Kernel/AutoLoad.php';
-    spl_autoload_register('\AutoLoad::loaded');
+// 注册自动加载
+require ROOT_PATH . '/Kernel/AutoLoad.php';
+spl_autoload_register('\AutoLoad::loaded');
 
-    // 实例化 app 实例
-    $app = new \Kernel\App\Application(ROOT_PATH);
+// 实例化 app 实例
+$app = new \Kernel\App\Application(ROOT_PATH);
 
-    try
-    {
-        // 获取本机的相关配置
-        $config = $app->make('config')->getExtendTypeAsKey();
+try {
+    // 获取本机的相关配置
+    $config = $app->make('config')->getExtendTypeAsKey();
 
-        // 获取需要下载的扩展实例
-        $extend = $app->make($argv[1]);
-    }
-    catch (\Kernel\App\Exception\ApplicationException $e)
-    {
-        exit($e->getMessage());
-    }
+    // 获取需要下载的扩展实例
+    $extend = $app->make($argv[1]);
+}
+catch (\Kernel\App\Exception\ApplicationException $e) {
+    exit($e->getMessage());
+}
 
-    // 是否有符合本机配置的扩展
-    if (! $extend->hasExtend($config))
-    {
-        exit('There is no extension package that matches your environment!');
-    }
+// 是否有符合本机配置的扩展
+if (!$extend->hasExtend($config)) {
+    exit('There is no extension package that matches your environment!');
+}
 
-    // 下载扩展包
-    $extend->downloadExtend();
+// 下载扩展包
+$extend->downloadExtend();
 
-    // 安装扩展包
-    $extend->installExtend();
+// 安装扩展包
+$extend->installExtend();

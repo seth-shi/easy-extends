@@ -35,7 +35,7 @@ class Config
     public function __construct()
     {
         // 扩展和php.ini 目录
-        $this->extPath = ini_get('extension_dir');
+        $this->extPath    = ini_get('extension_dir');
         $this->phpIniPath = php_ini_loaded_file();
 
         // 注册 phpinfo 信息
@@ -51,24 +51,19 @@ class Config
     {
         $config = $this->getExtendConfig($extendName, $parent);
 
-        if (! is_string($config))
-        {
-            $config = (string)$config;
+        if (!is_string($config)) {
+            $config = (string) $config;
         }
 
-        if (is_null($extendValue))
-        {
+        if (is_null($extendValue)) {
             // 如果配置了此项， 但是配置文件中没有这个选项
             $extendValue = $this->iniConfig[$config];
 
             // 已经打开了此扩展， false=没有 false值=没开 off  或者值等于 false都需要操作
-            if (array_search($config, $this->offConfig))
-            {
+            if (array_search($config, $this->offConfig)) {
                 return true;
             }
-        }
-        elseif ($extendValue == $config)
-        {
+        } elseif ($extendValue == $config) {
             return true;
         }
 
@@ -86,18 +81,15 @@ class Config
      */
     private function getExtendConfig($extendName = null, $parent = 'PHP')
     {
-        if (is_null($this->iniConfig))
-        {
+        if (is_null($this->iniConfig)) {
             $this->readExtendConfg();
         }
 
-        if (is_null($extendName))
-        {
+        if (is_null($extendName)) {
             return $this->iniConfig;
         }
 
-        if ( isset($this->iniConfig[$parent][$extendName]))
-        {
+        if (isset($this->iniConfig[$parent][$extendName])) {
             return $this->iniConfig[$parent][$extendName];
         }
 
@@ -124,30 +116,25 @@ class Config
     {
         // 这里读取的时候，需要判断一下是否存在
         $flag_count = 0;
-        $tmp_key = $extendName;
-        do
-        {
-            if (array_key_exists($tmp_key, $this->iniConfig[$parent]))
-            {
+        $tmp_key    = $extendName;
+        do {
+            if (array_key_exists($tmp_key, $this->iniConfig[$parent])) {
                 // 每次进来加一个 #
-                ++ $flag_count;
+                ++$flag_count;
                 $tmp_key = $extendName . str_repeat('#', $flag_count);
-            }
-            else
-            {
+            } else {
                 // 出去的时候，如果 flag_count 不是0 要重新赋值带有 # 的key 给它
-                if ($flag_count != 0)
-                {
+                if ($flag_count != 0) {
                     $extendName = $tmp_key;
                 }
                 // 如果没有重复就直接退出
                 $flag_count = false;
             }
 
-        } while($flag_count);
+        } while ($flag_count);
 
 
-        $writer = new IniWriter();
+        $writer                                = new IniWriter();
         // 往 $parent 节点插入一个值 这和 $var[] 的行为不同，后者会新建一个数组。  TODO
         $this->iniConfig[$parent][$extendName] = $extendValue;
 
@@ -179,26 +166,24 @@ class Config
         $config = $this->getPHPInfoArray();
 
         // Architecture == X86
-        if (! array_key_exists('Architecture', $config))
-        {
+        if (!array_key_exists('Architecture', $config)) {
             throw new ConfigException('phpinfo Architecture information exception');
         }
 
         // PHP Extension Build
-        if (! array_key_exists('PHP Extension Build', $config))
-        {
+        if (!array_key_exists('PHP Extension Build', $config)) {
             throw new ConfigException('phpinfo PHP Extension Build information exception');
         }
 
         // 注册进属性
         $this->winVersion = $config['Architecture'];
         // 格式总是这样的 API20151012,NTS,VC14 后面两个是用到的
-        $attr = explode(',', $config['PHP Extension Build']);
+        $attr             = explode(',', $config['PHP Extension Build']);
         $this->ntsVersion = $attr[1];
-        $this->vcVersion = $attr[2];
+        $this->vcVersion  = $attr[2];
         // PHP 版本
-        $phpVersion = phpversion();
-        $phpVersion = (false !== $phpVersion) ? $phpVersion : PHP_VERSION;
+        $phpVersion       = phpversion();
+        $phpVersion       = (false !== $phpVersion) ? $phpVersion : PHP_VERSION;
         // 截取前三位
         $this->phpVersion = substr($phpVersion, 0, 3);
     }
@@ -216,30 +201,25 @@ class Config
         phpinfo(INFO_GENERAL);
         $phpinfo = ob_get_clean();
 
-        if ($this->getRunMode() == 'cli')
-        {
+        if ($this->getRunMode() == 'cli') {
             // 以换行做为分隔
-            $tmp = explode("\n", $phpinfo);
+            $tmp    = explode("\n", $phpinfo);
             // 取出空值数组
-            $tmp = array_filter($tmp);
+            $tmp    = array_filter($tmp);
             // 以 => 分隔键值对
             $config = array();
 
-            foreach ($tmp as $k => $v)
-            {
+            foreach ($tmp as $k => $v) {
                 $v = explode('=>', $v);
 
                 unset($tmp[$k]);
 
-                if (count($v) === 2)
-                {
+                if (count($v) === 2) {
                     $config[1][] = $v[0];
                     $config[2][] = $v[1];
                 }
             }
-        }
-        else
-        {
+        } else {
             // 保留 tr td 标签
             $phpinfo = strip_tags($phpinfo, "<tr><td>");
 
@@ -256,8 +236,7 @@ class Config
         // 根据 phpinfo() 的信息合并成键值对数组
         $config = array_combine($config[1], $config[2]);
 
-        if (empty($config))
-        {
+        if (empty($config)) {
             throw new ConfigException('phpinfo Extendtion');
         }
 

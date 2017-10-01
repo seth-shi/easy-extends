@@ -52,6 +52,7 @@ php install rollback
 * mongodb
 * mysqli
 * mssql
+* opcache
 * openssl
 * sphinx
 * redis

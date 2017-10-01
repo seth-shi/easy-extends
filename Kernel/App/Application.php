@@ -29,13 +29,13 @@ class Application
     // 自身静态实例
     private static $instance;
 
-    
+
     public function __construct($basePath)
     {
         $basePath = str_replace('\\', '/', $basePath);
 
         // 把自己也注册进去
-        self::$instance = $this;
+        self::$instance    = $this;
         $this->instances[] = $this;
 
         // 网站根目录
@@ -70,7 +70,8 @@ class Application
     private function regisBaseServer()
     {
         // 注册配置
-        $this->bind('config', function(){
+        $this->bind('config', function()
+        {
             return new Config();
         });
     }
@@ -84,10 +85,8 @@ class Application
         $backupPath = $phpiniPath . '.bak';
 
         // 如果不存在备份文件， 就备份一次
-        if (! is_file($backupPath))
-        {
-            if (! copy($phpiniPath, $backupPath))
-            {
+        if (!is_file($backupPath)) {
+            if (!copy($phpiniPath, $backupPath)) {
                 exit('please backup php.ini for php.ini.bak');
             }
         }
@@ -102,16 +101,11 @@ class Application
      */
     public function bind($abstract, $concrete)
     {
-        if ($concrete instanceof Closure)
-        {
+        if ($concrete instanceof Closure) {
             $this->binds[$abstract] = $concrete;
-        }
-        elseif (is_object($concrete))
-        {
+        } elseif (is_object($concrete)) {
             $this->instances[$abstract] = $concrete;
-        }
-        else
-        {
+        } else {
             throw new ApplicationException('bind fail');
         }
     }
@@ -126,16 +120,13 @@ class Application
         $abstract = strtolower($abstract);
 
         // 直接实例化扩展对象
-        if (array_key_exists($abstract, $this->extendMaps))
-        {
+        if (array_key_exists($abstract, $this->extendMaps)) {
             // 使用反射实例化对象，而不是直接实例化
             return $this->build($this->extendMaps[$abstract]);
         }
 
-        if (! array_key_exists($abstract, $this->instances))
-        {
-            if (! array_key_exists($abstract, $this->binds))
-            {
+        if (!array_key_exists($abstract, $this->instances)) {
+            if (!array_key_exists($abstract, $this->binds)) {
                 throw new ApplicationException("not exists [{$abstract}] instance");
             }
 
@@ -157,24 +148,20 @@ class Application
     public function build($concrete, $parameters = array())
     {
         // 回调执行
-        if ($concrete instanceof Closure)
-        {
+        if ($concrete instanceof Closure) {
             return $concrete($this, $parameters);
         }
 
         // 不是闭包，则通过反射获取实例
-        try
-        {
+        try {
             $reflector = new ReflectionClass($concrete);
         }
-        catch (ReflectionException  $e)
-        {
+        catch (ReflectionException $e) {
             throw new ApplicationException("{$concrete} class error: {$e->getMessage()}");
         }
 
         // 不可以实例化类
-        if (! $reflector->isInstantiable())
-        {
+        if (!$reflector->isInstantiable()) {
             throw new ApplicationException($concrete . ' class not instantiable');
         }
 
@@ -182,8 +169,7 @@ class Application
         $constructor = $reflector->getConstructor();
 
         // 没有构造函数， 直接通过 new 实例化
-        if (is_null($constructor))
-        {
+        if (is_null($constructor)) {
             return new $concrete;
         }
 
@@ -193,10 +179,8 @@ class Application
         /**
          * 把传进来的索引数组转换成关联数组， 键为定义时的变量名
          */
-        foreach ($dependencies as $key => $value)
-        {
-            if (is_numeric($key))
-            {
+        foreach ($dependencies as $key => $value) {
+            if (is_numeric($key)) {
                 unset($parameters[$key]);
 
                 $parameters[$dependencies[$key]->name] = $value;
@@ -205,29 +189,21 @@ class Application
 
         // 实际生成对象需要的参数
         $instance_paramters = [];
-        foreach ($dependencies as $parameter)
-        {
+        foreach ($dependencies as $parameter) {
             // 获取类名，不是对象返回 null
             $dependency = $parameter->getClass();
 
-            if (array_key_exists($parameter->name, $parameters))
-            {
+            if (array_key_exists($parameter->name, $parameters)) {
                 $instance_paramters[] = $parameters[$parameter->name];
             }
-            if (is_null($dependency))
-            {
+            if (is_null($dependency)) {
                 // 非对象类型，又没有参数，只能获取默认值
-                if ($parameter->isDefaultValueAvailable())
-                {
+                if ($parameter->isDefaultValueAvailable()) {
                     $instance_paramters[] = $parameter->getDefaultValue();
-                }
-                else
-                {
+                } else {
                     throw new ApplicationException('parameters missing');
                 }
-            }
-            else
-            {
+            } else {
                 // 是对象递归调用实例化
                 $dependencies[] = $this->build($dependency->name);
             }
