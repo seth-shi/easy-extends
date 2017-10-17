@@ -37,5 +37,32 @@ class Xdebug extends Extendtion
     protected $dllName = 'php_xdebug.dll';
 
 
+    public function openExtend()
+    {
+        // dll path
+        $extPath  = app('config')->getExtPath();
+
+        $tmpPath = dirname($extPath);
+        $dllPath = $extPath . '/' . $this->dllName;
+
+        $config = <<<config
+[XDebug]
+xdebug.profiler_output_dir="{$tmpPath}"
+xdebug.trace_output_dir="{$tmpPath}"
+xdebug.remote_port=9001
+xdebug.idekey="PHPSTORM"
+zend_extension={$dllPath}
+config;
+
+        $phpIni = app('config')->getphpIniPath();
+
+        if (file_put_contents($phpIni, $config, FILE_APPEND)) {
+            echo 'open complete';
+        } else {
+            echo 'open fails';
+        }
+
+
+    }
 
 }
