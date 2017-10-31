@@ -49,11 +49,17 @@ class Config
      */
     public function openExtend($extendName, $extendValue = null, $parent = 'PHP')
     {
+        // 扩展是否已经开启
+        if ($this->isOpenExtendConfig($extendValue, $parent)) {
+            return true;
+        }
+
         $config = $this->getExtendConfig($extendName, $parent);
 
         if (!is_string($config)) {
             $config = (string) $config;
         }
+
 
         if (is_null($extendValue)) {
             // 如果配置了此项， 但是配置文件中没有这个选项
@@ -89,11 +95,26 @@ class Config
             return $this->iniConfig;
         }
 
+
         if (isset($this->iniConfig[$parent][$extendName])) {
             return $this->iniConfig[$parent][$extendName];
         }
 
         return false;
+    }
+
+    /**
+     * 扩展是否已经开启
+     * @param null $extendName
+     * @param string $parent
+     */
+    private function isOpenExtendConfig($extendName, $parent = 'PHP')
+    {
+        if (is_null($this->iniConfig)) {
+            $this->readExtendConfg();
+        }
+
+        return in_array($extendName, $this->iniConfig[$parent]);
     }
 
     /**
