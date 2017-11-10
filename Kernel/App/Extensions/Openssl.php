@@ -32,5 +32,25 @@ class Openssl extends Extendtion
     {
         // 打开扩展extension=php_bz2.dll
         $this->openExtend();
+
+        // 写入文件最后面
+        $config = $this->assertConfig(';[openssl]');
+    }
+
+
+
+    protected function getExtendConfig()
+    {
+        return <<<config
+[openssl]
+; The location of a Certificate Authority (CA) file on the local filesystem
+; to use when verifying the identity of SSL/TLS peers. Most users should
+; not specify a value for this directive as PHP will attempt to use the
+; OS-managed cert stores in its absence. If specified, this value may still
+; be overridden on a per-stream basis via the "cafile" SSL stream context
+; option.
+;openssl.cafile=
+config;
+
     }
 }
