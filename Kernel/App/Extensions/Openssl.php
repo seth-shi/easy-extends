@@ -34,7 +34,7 @@ class Openssl extends Extendtion
         $this->openExtend();
 
         // 写入文件最后面
-        $config = $this->assertConfig(';[openssl]');
+        $config = app('config')->assertConfig(';[openssl]', $this->getExtendConfig());
     }
 
 

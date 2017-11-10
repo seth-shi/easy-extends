@@ -34,6 +34,8 @@ class Config
      */
     public function __construct()
     {
+        $this->checkConfig();
+
         // 扩展和php.ini 目录
         $this->extPath    = ini_get('extension_dir');
         $this->phpIniPath = php_ini_loaded_file();
@@ -291,7 +293,49 @@ class Config
      */
     public function getphpIniPath()
     {
+        if (is_null($this->phpIniPath)) {
+            $this->phpIniPath = php_ini_loaded_file();
+        }
+
         return $this->phpIniPath;
     }
+
+    /**
+     * 检查配置是否存在
+     */
+    protected function checkConfig()
+    {
+        if (! php_ini_loaded_file()) {
+
+            $msg = <<<msg
+invalid php.ini path, please copy  php.ini-development or php.ini-production as php.ini, and configure ; extension_dir = "ext"
+msg;
+            exit($msg);
+        }
+    }
+
+    /**
+     * 带注释的配置选项
+     * @param $config
+     */
+    public function assertConfig($config, $default = '')
+    {
+        $rightConfig = ltrim($config, ';');
+        $phpIni = $this->getphpIniPath();
+        $allConfig = file_get_contents($phpIni);
+
+        // 如果找到则注释，
+        if (strpos($allConfig, $rightConfig)) {
+            return ;
+        }
+        elseif (strpos($allConfig, $config)) {
+            $allConfig = str_replace($config, $rightConfig, $allConfig);
+        } else {
+            $allConfig .= $default;
+        }
+
+        file_put_contents($phpIni, $allConfig);
+    }
+
 
 }

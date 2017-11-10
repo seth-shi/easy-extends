@@ -202,32 +202,4 @@ class Extendtion implements ExtendtionInterface
     {
         return is_string($service) ? ltrim($service, '\\/') : $service;
     }
-
-    /**
-     * 带注释的配置选项
-     * @param $config
-     */
-    protected function assertConfig($config)
-    {
-        $rightConfig = ltrim($config, ';');
-        $phpIni = app('config')->getphpIniPath();
-        $allConfig = file_get_contents($phpIni);
-
-        // 如果找到则注释，
-        if (strpos($allConfig, $rightConfig)) {
-            return ;
-        }
-        elseif (strpos($allConfig, $config)) {
-            $allConfig = str_replace($config, $rightConfig, $allConfig);
-        } else {
-            $allConfig .= $this->getExtendConfig();
-        }
-
-        file_put_contents($phpIni, $allConfig);
-    }
-
-    protected function getExtendConfig()
-    {
-        return '';
-    }
 }
