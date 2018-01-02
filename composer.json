@@ -1,12 +1,12 @@
 {
-    "name": "waitmoonman/easy-extends",
+    "name": "davidnineroc/easy-extends",
     "description": "一个简单快速安装PHP扩展的程序",
     "keywords": ["php", "extends", "easy", "curl", "redis", "memcache"],
     "type": "project",
     "license": "MIT",
     "authors": [
         {
-            "name": "WaitMoonMan",
+            "name": "DavidNineRoc",
             "email": "1033404553@qq.com"
         }
     ],
