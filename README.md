@@ -1,4 +1,4 @@
-﻿# WaitMoonMan/easy-extends
+﻿# easy-extends
 ![语言](https://img.shields.io/badge/language-php-green.svg)
 ![协议](https://img.shields.io/badge/license-MIT-008800.svg)
 [![博客](https://img.shields.io/badge/blog-@waitmoonman-blue.svg)](https://waitmoonman.github.io/)
@@ -18,13 +18,13 @@
 1. PHP >= 5.3
 
 ## Installation
-[easy-extends压缩包](https://github.com/waitmoonman/easy-extends/archive/master.zip)
+[easy-extends压缩包](https://github.com/davidnineroc/easy-extends/archive/master.zip)
 ```shell
 // 手动下载
 github 的 Clone or download 按钮 -> download zip 即可下载压缩包
 
 // composer安装
-composer require waitmoonman/easy-extends
+composer require davidnineroc/easy-extends
 ```
 ## Usage
 ```php
