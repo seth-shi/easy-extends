@@ -1,11 +1,6 @@
 ﻿# easy-extends
  ###
  > !!!最简单的方法就是使用**Linux**
-![语言](https://img.shields.io/badge/language-php-green.svg)
-![协议](https://img.shields.io/badge/license-MIT-008800.svg)
-[![博客](https://img.shields.io/badge/blog-@waitmoonman-blue.svg)](https://waitmoonman.github.io/)
-[![下载](https://img.shields.io/badge/download-link-0000aa.svg)](https://github.com/waitmoonman/easy-extends/archive/master.zip)
-
 ## About
 ```
 +--------------+                    +----------------+            +------------+
