@@ -31,19 +31,18 @@ class Xdebug extends Extendtion
         '5.4-ts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/xdebug/2.4.1/php_xdebug-2.4.1-5.4-ts-vc9-x86.zip',
 
         '5.3-nts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/xdebug/2.2.7/php_xdebug-2.2.7-5.3-nts-vc9-x86.zip',
-        '5.3-ts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/xdebug/2.2.7/php_xdebug-2.2.7-5.3-ts-vc9-x86.zip'
+        '5.3-ts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/xdebug/2.2.7/php_xdebug-2.2.7-5.3-ts-vc9-x86.zip',
     );
 
     protected $dllName = 'php_xdebug.dll';
 
-
     public function openExtend()
     {
         // dll path
-        $extPath  = app('config')->getExtPath();
+        $extPath = app('config')->getExtPath();
 
         $tmpPath = dirname($extPath);
-        $dllPath = $extPath . '/' . $this->dllName;
+        $dllPath = $extPath.'/'.$this->dllName;
 
         $config = <<<config
 [XDebug]
@@ -61,8 +60,5 @@ config;
         } else {
             echo 'open fails';
         }
-
-
     }
-
 }

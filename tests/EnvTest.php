@@ -2,7 +2,6 @@
 
 namespace Tests;
 
-
 class EnvTest extends TestCase
 {
     public function testHasExtPath()

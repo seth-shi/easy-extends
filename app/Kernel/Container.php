@@ -2,7 +2,6 @@
 
 namespace DavidNineRoc\EasyExtends\Kernel;
 
-
 use DavidNineRoc\EasyExtends\Contracts\Container as ContainerContract;
 
 class Container implements ContainerContract
@@ -11,12 +10,10 @@ class Container implements ContainerContract
 
     public function has($key)
     {
-
     }
 
     public function get($key)
     {
-
     }
 
     public static function getInstance()
@@ -27,7 +24,6 @@ class Container implements ContainerContract
 
         return static::$instance;
     }
-
 
     protected function setInstance(ContainerContract $container)
     {

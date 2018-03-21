@@ -2,7 +2,6 @@
 
 namespace Kernel\App\Extensions;
 
-
 use Kernel\App\Common\Extendtion;
 
 class Memcache extends Extendtion
@@ -22,11 +21,8 @@ class Memcache extends Extendtion
         '5.4-ts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/memcache/3.0.8/php_memcache-3.0.8-5.4-ts-vc9-x86.zip',
 
         '5.3-nts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/memcache/3.0.8/php_memcache-3.0.8-5.3-nts-vc9-x86.zip',
-        '5.3-ts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/memcache/3.0.8/php_memcache-3.0.8-5.3-ts-vc9-x86.zip'
+        '5.3-ts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/memcache/3.0.8/php_memcache-3.0.8-5.3-ts-vc9-x86.zip',
     );
 
     protected $dllName = 'php_memcache.dll';
-
-
-
 }

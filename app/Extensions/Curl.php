@@ -2,13 +2,9 @@
 
 namespace DavidNineRoc\EasyExtends\Extensions;
 
-use DavidNineRoc\EasyExtends\Extensions\Extendtion;
-
-
 /**
  * CURL 没找到 dll 文件，应该是默认安装 PHP 时就有的
- * Class Curl
- * @package Kernel\App\Extensions
+ * Class Curl.
  */
 class Curl extends Extendtion
 {
@@ -26,7 +22,7 @@ class Curl extends Extendtion
     }
 
     /**
-     * 安装扩展
+     * 安装扩展.
      */
     public function installExtend()
     {

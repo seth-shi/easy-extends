@@ -9,8 +9,7 @@ try {
 
     // 获取需要下载的扩展实例
     $extend = $app->make($argv[1]);
-}
-catch (\Kernel\App\Exception\ApplicationException $e) {
+} catch (\Kernel\App\Exception\ApplicationException $e) {
     exit($e->getMessage());
 }
 

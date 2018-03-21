@@ -2,7 +2,6 @@
 
 namespace Tests;
 
-
 class ApplicationTest extends TestCase
 {
     public function testBasePathNotNull()
