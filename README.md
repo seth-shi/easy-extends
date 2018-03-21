@@ -1,8 +1,19 @@
 ﻿# easy-extends
-![语言](https://img.shields.io/badge/language-php-green.svg)
-![协议](https://img.shields.io/badge/license-MIT-008800.svg)
-[![博客](https://img.shields.io/badge/blog-@waitmoonman-blue.svg)](https://waitmoonman.github.io/)
-[![下载](https://img.shields.io/badge/download-link-0000aa.svg)](https://github.com/waitmoonman/easy-extends/archive/master.zip)
+
+<p align="center">
+    <a href="https://travis-ci.org/DavidNineRoc/easy-extends">
+        <img src="https://travis-ci.org/DavidNineRoc/easy-extends.svg?branch=master" alt="Travis CI">
+    </a>
+    <a href="https://styleci.io/repos/103732839">
+        <img src="https://styleci.io/repos/103732839/shield?branch=master" alt="StyleCI">
+    </a>
+    <a href="https://packagist.org/packages/davidnineroc/easy-extends">
+        <img src="https://poser.pugx.org/davidnineroc/easy-extends/downloads" alt="Total Downloads">
+    </a>
+    <a href="https://packagist.org/packages/davidnineroc/easy-extends">
+        <img src="https://poser.pugx.org/davidnineroc/easy-extends/license" alt="License">
+    </a>
+</p> 
 
 ## About
 ```
