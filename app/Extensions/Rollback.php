@@ -7,18 +7,20 @@ use Kernel\App\Common\Extendtion;
 class Rollback extends Extendtion
 {
     private $phpiniPath = '';
-    private $backupPath = '';
 
+    private $backupPath = '';
 
     public function __construct()
     {
         $this->phpiniPath = app('config')->getphpIniPath();
-        $this->backupPath = $this->phpiniPath . '.bak';
+        $this->backupPath = $this->phpiniPath.'.bak';
     }
 
     /**
-     * 回滚不需要判断
+     * 回滚不需要判断.
+     *
      * @param $key
+     *
      * @return bool
      */
     public function hasExtend($key)
@@ -32,7 +34,7 @@ class Rollback extends Extendtion
     }
 
     /**
-     * 把 php.ini 文件回复到原来的地方
+     * 把 php.ini 文件回复到原来的地方.
      */
     public function installExtend()
     {

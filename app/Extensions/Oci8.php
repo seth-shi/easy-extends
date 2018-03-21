@@ -4,11 +4,9 @@ namespace Kernel\App\Extensions;
 
 use Kernel\App\Common\Extendtion;
 
-
 /**
  * 打开扩展之后需要安装oralce Instant Client
- * Class Oci8
- * @package Kernel\App\Extensions
+ * Class Oci8.
  */
 class Oci8 extends Extendtion
 {
@@ -37,7 +35,7 @@ class Oci8 extends Extendtion
         '5.4-ts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/oci8/2.0.8/php_oci8-2.0.8-5.4-ts-vc9-x86.zip',
 
         '5.3-nts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/oci8/2.0.8/php_oci8-2.0.8-5.3-nts-vc9-x86.zip',
-        '5.3-ts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/oci8/2.0.8/php_oci8-2.0.8-5.3-ts-vc9-x86.zip'
+        '5.3-ts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/oci8/2.0.8/php_oci8-2.0.8-5.3-ts-vc9-x86.zip',
     );
 
     protected $dllName = 'php_oci8.dll';

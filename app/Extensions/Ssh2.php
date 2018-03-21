@@ -2,7 +2,6 @@
 
 namespace Kernel\App\Extensions;
 
-
 use Kernel\App\Common\Extendtion;
 
 class Ssh2 extends Extendtion
@@ -27,11 +26,8 @@ class Ssh2 extends Extendtion
         '5.4-ts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/ssh2/0.12/php_ssh2-0.12-5.4-ts-vc9-x86.zip',
 
         '5.3-nts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/ssh2/0.12/php_ssh2-0.12-5.3-nts-vc9-x86.zip',
-        '5.3-ts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/ssh2/0.12/php_ssh2-0.12-5.3-ts-vc9-x86.zip'
+        '5.3-ts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/ssh2/0.12/php_ssh2-0.12-5.3-ts-vc9-x86.zip',
     );
 
     protected $dllName = 'php_ssh2.dll';
-
-
-
 }

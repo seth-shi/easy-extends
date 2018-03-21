@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 引用 Piwik - free/libre analytics platform 的包
+ * 引用 Piwik - free/libre analytics platform 的包.
  *
  * 读的时候，自动转换成bool值，不符合实际情况，稍加修改,读取的时候有多个 extends 多个键值会被覆盖
  */
@@ -33,8 +33,9 @@ class IniWriter
      * ```
      *
      * @param string $filename
-     * @param array $config
-     * @param string $header Optional header to insert at the top of the file.
+     * @param array  $config
+     * @param string $header   optional header to insert at the top of the file
+     *
      * @throws ConfigException
      */
     public function writeToFile($filename, array $config, $header = '')
@@ -63,9 +64,11 @@ class IniWriter
      * );
      * ```
      *
-     * @param array $config
-     * @param string $header Optional header to insert at the top of the file.
+     * @param array  $config
+     * @param string $header optional header to insert at the top of the file
+     *
      * @return string
+     *
      * @throws ConfigException
      */
     public function writeToString(array $config, $header = '')
@@ -90,23 +93,22 @@ class IniWriter
 
             // 这里是
             foreach ($section as $option => $value) {
-
                 if (is_numeric($option)) {
                     $option = $sectionName;
-                    $value  = array(
-                        $value
+                    $value = array(
+                        $value,
                     );
                 }
 
                 if (is_array($value)) {
                     foreach ($value as $currentValue) {
-                        $ini .= $option . '[] = ' . $this->encodeValue($currentValue) . "\n";
+                        $ini .= $option.'[] = '.$this->encodeValue($currentValue)."\n";
                     }
                 } else {
                     // 这里修改一下， extends 多个的时候，在读取的时候加了 #
                     $option = rtrim($option, '#');
 
-                    $ini .= $option . ' = ' . $this->encodeValue($value) . "\n";
+                    $ini .= $option.' = '.$this->encodeValue($value)."\n";
                 }
             }
 
@@ -124,6 +126,7 @@ class IniWriter
         if (is_string($value)) {
             return "\"$value\"";
         }
+
         return $value;
     }
 }

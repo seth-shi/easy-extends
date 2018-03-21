@@ -2,7 +2,6 @@
 
 namespace Kernel\App\Extensions;
 
-
 use Kernel\App\Common\Extendtion;
 
 class Mongodb extends Extendtion
@@ -30,7 +29,4 @@ class Mongodb extends Extendtion
     );
 
     protected $dllName = 'php_mongodb.dll';
-
-
-
 }

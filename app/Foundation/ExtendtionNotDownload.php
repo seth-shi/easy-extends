@@ -2,19 +2,18 @@
 
 namespace Kernel\App\Common;
 
-use Kernel\App\Http\Request;
-
 /**
  * 只需要打开扩展不需要下载的继承这个类
- * Class Expand
- * @package Kernel\App\Common
+ * Class Expand.
  */
 class ExtendtionNotDownload implements ExtendtionInterface
 {
     // 打开的扩展名
     protected $extendName;
+
     // 扩展值
     protected $extendValue;
+
     // 父节点
     protected $parent = 'PHP';
 
@@ -32,5 +31,4 @@ class ExtendtionNotDownload implements ExtendtionInterface
     {
         exit('please overwrite ExtendsNotDownload');
     }
-
 }

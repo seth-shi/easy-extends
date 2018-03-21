@@ -2,7 +2,6 @@
 
 namespace Kernel\App\Extensions;
 
-
 use Kernel\App\Common\Extendtion;
 
 class Sphinx extends Extendtion
@@ -22,11 +21,8 @@ class Sphinx extends Extendtion
         '5.4-ts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/sphinx/1.3.3/php_sphinx-1.3.3-5.4-ts-vc9-x86.zip',
 
         '5.3-nts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/sphinx/1.3.3/php_sphinx-1.3.3-5.3-nts-vc9-x86.zip',
-        '5.3-ts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/sphinx/1.3.3/php_sphinx-1.3.3-5.3-ts-vc9-x86.zip'
+        '5.3-ts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/sphinx/1.3.3/php_sphinx-1.3.3-5.3-ts-vc9-x86.zip',
     );
 
     protected $dllName = 'php_sphinx.dll';
-
-
-
 }

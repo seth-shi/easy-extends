@@ -2,7 +2,6 @@
 
 namespace Kernel\App\Extensions;
 
-
 use Kernel\App\Common\Extendtion;
 
 class Mongo extends Extendtion
@@ -22,11 +21,8 @@ class Mongo extends Extendtion
         '5.4-ts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/mongo/1.6.14/php_mongo-1.6.14-5.4-ts-vc9-x86.zip',
 
         '5.3-nts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/mongo/1.6.14/php_mongo-1.6.14-5.3-nts-vc9-x86.zip',
-        '5.3-ts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/mongo/1.6.14/php_mongo-1.6.14-5.3-ts-vc9-x86.zip'
+        '5.3-ts-vc9-x86' => 'http://windows.php.net/downloads/pecl/releases/mongo/1.6.14/php_mongo-1.6.14-5.3-ts-vc9-x86.zip',
     );
 
     protected $dllName = 'php_mongo.dll';
-
-
-
 }

@@ -1,13 +1,13 @@
 <?php
 /**
- * 引用 Piwik - free/libre analytics platform 的包
+ * 引用 Piwik - free/libre analytics platform 的包.
  *
  * 读的时候，自动转换成bool值，不符合实际情况，稍加修改,读取的时候有多个 extends 多个键值会被覆盖
  */
 
 namespace Kernel\App;
-use Kernel\App\Exception\ConfigException;
 
+use Kernel\App\Exception\ConfigException;
 
 /**
  * Reads INI configuration.
@@ -41,8 +41,10 @@ class IniReader
      * );
      * ```
      *
-     * @param string $filename The file to read.
+     * @param string $filename the file to read
+     *
      * @throws ConfigException
+     *
      * @return array
      */
     public function readFile($filename)
@@ -69,8 +71,10 @@ class IniReader
      * );
      * ```
      *
-     * @param string $ini String containing INI configuration.
+     * @param string $ini string containing INI configuration
+     *
      * @throws ConfigException
+     *
      * @return array
      */
     public function readString($ini)
@@ -79,10 +83,8 @@ class IniReader
         // See http://3v4l.org/jD1Lh
         $ini .= "\n";
 
-
         // 不能用默认的 parse_ini_file 文件解析，因为配置文件中有多个 extend
         $array = $this->readWithAlternativeImplementation($ini);
-
 
         return $array;
     }
@@ -95,7 +97,7 @@ class IniReader
 
         $content = $this->getFileContent($filename);
 
-        if ($content === false) {
+        if (false === $content) {
             throw new ConfigException(sprintf('Impossible to read the file %s', $filename));
         }
 
@@ -119,8 +121,10 @@ class IniReader
      * );
      * ```
      *
-     * @param string $filename The path to a file.
+     * @param string $filename the path to a file
+     *
      * @throws ConfigException
+     *
      * @return array
      */
     public function readComments($filename)
@@ -130,28 +134,29 @@ class IniReader
 
         $descriptions = array();
 
-        $section     = '';
+        $section = '';
         $lastComment = '';
 
         foreach ($ini as $line) {
             $line = trim($line);
 
-            if (strpos($line, '[') === 0) {
-                $tmp     = explode(']', $line);
+            if (0 === strpos($line, '[')) {
+                $tmp = explode(']', $line);
                 $section = trim(substr($tmp[0], 1));
 
                 $descriptions[$section] = array();
-                $lastComment            = '';
+                $lastComment = '';
+
                 continue;
             }
 
-
             if (!preg_match('/^[a-zA-Z0-9[]/', $line)) {
-                if (strpos($line, ';') === 0) {
+                if (0 === strpos($line, ';')) {
                     $line = trim(substr($line, 1));
                 }
                 // comment
-                $lastComment .= $line . "\n";
+                $lastComment .= $line."\n";
+
                 continue;
             }
 
@@ -188,61 +193,58 @@ class IniReader
      * @author anthon (dot) pang (at) gmail (dot) com
      *
      * @param string $ini
+     *
      * @return array
      */
     private function readWithAlternativeImplementation($ini)
     {
         $ini = $this->splitIniContentIntoLines($ini);
 
-
-        if (count($ini) == 0) {
+        if (0 === count($ini)) {
             return array();
         }
 
         $sections = array();
-        $values   = array();
-        $result   = array();
-        $globals  = array();
-        $i        = 0;
+        $values = array();
+        $result = array();
+        $globals = array();
+        $i = 0;
 
         $ss = 1;
         foreach ($ini as $line) {
             $line = trim($line);
-            $line = str_replace("\t", " ", $line);
-
+            $line = str_replace("\t", ' ', $line);
 
             // Comments
             if (!preg_match('/^[a-zA-Z0-9[]/', $line)) {
                 continue;
             }
 
-
             // Sections 模块
-            if ($line{0} == '[') {
-                $tmp        = explode(']', $line);
+            if ('[' === $line[0]) {
+                $tmp = explode(']', $line);
                 $sections[] = trim(substr($tmp[0], 1));
-                $i++;
+                ++$i;
+
                 continue;
             }
 
             // Key-value pair
             list($key, $value) = explode('=', $line, 2);
 
-            $key   = trim($key);
+            $key = trim($key);
             $value = trim($value);
 
-
-
-            if (strstr($value, ";")) {
+            if (strstr($value, ';')) {
                 $tmp = explode(';', $value);
-                if (count($tmp) == 2) {
-                    if ((($value{0} != '"') && ($value{0} != "'")) || preg_match('/^".*"\s*;/', $value) || preg_match('/^".*;[^"]*$/', $value) || preg_match("/^'.*'\s*;/", $value) || preg_match("/^'.*;[^']*$/", $value)) {
+                if (2 === count($tmp)) {
+                    if ((('"' !== $value[0]) && ("'" !== $value[0])) || preg_match('/^".*"\s*;/', $value) || preg_match('/^".*;[^"]*$/', $value) || preg_match("/^'.*'\s*;/", $value) || preg_match("/^'.*;[^']*$/", $value)) {
                         $value = $tmp[0];
                     }
                 } else {
-                    if ($value{0} == '"') {
+                    if ('"' === $value[0]) {
                         $value = preg_replace('/^"(.*)".*/', '$1', $value);
-                    } elseif ($value{0} == "'") {
+                    } elseif ("'" === $value[0]) {
                         $value = preg_replace("/^'(.*)'.*/", '$1', $value);
                     } else {
                         $value = $tmp[0];
@@ -251,7 +253,6 @@ class IniReader
             }
 
             $value = trim($value);
-
 
             // Special keywords
             /*  不需要特殊的标记
@@ -268,54 +269,46 @@ class IniReader
                 $value = trim($value, "'\"");
             }
 
-
-            if ($i == 0) {
-                if (substr($key, -2) == '[]') {
+            if (0 === $i) {
+                if ('[]' === substr($key, -2)) {
                     $globals[substr($key, 0, -2)][] = $value;
                 } else {
                     $globals[$key] = $value;
                 }
             } else {
-                if (substr($key, -2) == '[]') {
+                if ('[]' === substr($key, -2)) {
                     $values[$i - 1][substr($key, 0, -2)][] = $value;
                 } else {
-
                     // ！！！当有重复的 key 时，在后面加#直至没有重复
                     $flag_count = 0;
-                    $tmp_key    = $key;
+                    $tmp_key = $key;
                     do {
                         if (!isset($values[$i - 1])) {
                             $values[$i - 1] = array();
                         }
 
-
                         if (array_key_exists($tmp_key, $values[$i - 1])) {
                             // 每次进来加一个 #
                             ++$flag_count;
-                            $tmp_key = $key . str_repeat('#', $flag_count);
+                            $tmp_key = $key.str_repeat('#', $flag_count);
                         } else {
                             // 出去的时候，如果 flag_count 不是0 要重新赋值带有 # 的key 给它
-                            if ($flag_count != 0) {
+                            if (0 !== $flag_count) {
                                 $key = $tmp_key;
                             }
 
                             // 如果没有重复就直接退出
                             $flag_count = false;
                         }
-
                     } while ($flag_count);
-
                 }
             }
-
 
             $values[$i - 1][$key] = $value;
         }
 
-
         // 把索引数组转换成关联数组
-        for ($j = 0; $j < $i; $j++) {
-
+        for ($j = 0; $j < $i; ++$j) {
             if (isset($values[$j])) {
                 $result[$sections[$j]] = $values[$j];
             } else {
@@ -330,7 +323,8 @@ class IniReader
 
     /**
      * @param string $filename
-     * @return bool|string Returns false if failure.
+     *
+     * @return bool|string returns false if failure
      */
     private function getFileContent($filename)
     {
@@ -338,7 +332,7 @@ class IniReader
             return file_get_contents($filename);
         } elseif (function_exists('file')) {
             $ini = file($filename);
-            if ($ini !== false) {
+            if (false !== $ini) {
                 return implode("\n", $ini);
             }
         } elseif (function_exists('fopen') && function_exists('fread')) {
@@ -348,13 +342,10 @@ class IniReader
             }
             $ini = fread($handle, filesize($filename));
             fclose($handle);
+
             return $ini;
         }
 
         return false;
     }
-
-
-
-
 }
