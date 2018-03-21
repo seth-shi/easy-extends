@@ -2,7 +2,6 @@
 
 namespace DavidNineRoc\EasyExtends\Exception;
 
-
-class ConfigException extends EasyExtendsException
+class ContainerException extends EasyExtendsException
 {
 }

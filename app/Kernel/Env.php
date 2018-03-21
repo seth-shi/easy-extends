@@ -1,6 +1,6 @@
 <?php
 
-namespace DavidNineRoc\EasyExtends\Foundation;
+namespace DavidNineRoc\EasyExtends\Kernel;
 
 use Kernel\App\Exception\ConfigException;
 use Kernel\App\Exception\NotExtensionDirException;

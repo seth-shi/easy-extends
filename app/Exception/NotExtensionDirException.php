@@ -1,9 +1,8 @@
 <?php
 
-namespace Kernel\App\Exception;
+namespace DavidNineRoc\EasyExtends\Exception;
 
-use Exception;
 
-class NotExtensionDirException extends Exception
+class NotExtensionDirException extends EasyExtendsException
 {
 }

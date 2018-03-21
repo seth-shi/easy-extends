@@ -2,18 +2,20 @@
 
 namespace DavidNineRoc\EasyExtends;
 
-use DavidNineRoc\EasyExtends\Foundation\Env;
 use DavidNineRoc\EasyExtends\Kernel\Container;
+use DavidNineRoc\EasyExtends\Kernel\Env;
+use DavidNineRoc\EasyExtends\Kernel\ExceptionHandler;
+
 
 class Application extends Container
 {
-    use Env;
+    use Env, ExceptionHandler;
 
     // 版本号
     const VERSION = '1.1.2';
 
     // 根目录
-    protected $basePath;
+    public $basePath;
 
     // 扩展 maps
     protected $extendMaps = array();
@@ -23,18 +25,8 @@ class Application extends Container
         if (!is_null($basePath)) {
             $this->basePath = $basePath;
         }
-
         $this->setInstance($this);
+        $this->registerFatalHandler();
         $this->loadConfig();
-    }
-
-    /**
-     * 获取根路径.
-     *
-     * @return mixed
-     */
-    public function getBasePath()
-    {
-        return $this->basePath;
     }
 }

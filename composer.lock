@@ -4,8 +4,140 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7570ae193a69719645fae3afd559eee6",
-    "packages": [],
+    "content-hash": "f7665373799af594492b7369aef9eec7",
+    "packages": [
+        {
+            "name": "austinhyde/iniparser",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/austinhyde/IniParser.git",
+                "reference": "3b5a925ac99619d198d8ff93958913ca3311f266"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/austinhyde/IniParser/3b5a925ac99619d198d8ff93958913ca3311f266.zip",
+                "reference": "3b5a925ac99619d198d8ff93958913ca3311f266",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "IniParser": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Till Klampaeckel",
+                    "email": "till@php.net",
+                    "homepage": "http://till.klampaeckel.de/"
+                },
+                {
+                    "name": "Austin Hyde",
+                    "email": "austin109@gmail.com"
+                }
+            ],
+            "description": "A Zend_Config_Ini like parser for .ini files.",
+            "keywords": [
+                "configuration"
+            ],
+            "time": "2014-04-12T14:28:42+00:00"
+        },
+        {
+            "name": "retrinko/ini",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/retrinko/ini.git",
+                "reference": "3c323527c045be5dfdd43840d1fe9d02cf9a5520"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/retrinko/ini/3c323527c045be5dfdd43840d1fe9d02cf9a5520.zip",
+                "reference": "3c323527c045be5dfdd43840d1fe9d02cf9a5520",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Retrinko\\Ini\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Miguel Ángel Graña",
+                    "email": "miguel.mailbox@gmail.com"
+                }
+            ],
+            "description": "Library for parsing and writing INI files",
+            "keywords": [
+                "file",
+                "ini",
+                "parse",
+                "read",
+                "write"
+            ],
+            "time": "2016-07-08T08:06:26+00:00"
+        },
+        {
+            "name": "sagephp/ini",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SagePHP/ini.git",
+                "reference": "a59b8ff4faefcd6868d736c40187a554e66ce4b3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/SagePHP/ini/a59b8ff4faefcd6868d736c40187a554e66ce4b3.zip",
+                "reference": "a59b8ff4faefcd6868d736c40187a554e66ce4b3",
+                "shasum": ""
+            },
+            "require-dev": {
+                "symfony/class-loader": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nuno Costa",
+                    "email": "nuno@francodacosta.com",
+                    "homepage": "http://www.francodacosta.com"
+                }
+            ],
+            "description": "Ini file manipulation. supports sections and comments",
+            "keywords": [
+                "configuration",
+                "ini",
+                "ini file",
+                "parser",
+                "php"
+            ],
+            "time": "2013-11-15T21:30:52+00:00"
+        }
+    ],
     "packages-dev": [
         {
             "name": "doctrine/instantiator",
@@ -1467,7 +1599,11 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "sagephp/ini": 20,
+        "austinhyde/iniparser": 20,
+        "retrinko/ini": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
