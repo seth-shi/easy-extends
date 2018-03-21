@@ -1,15 +1,12 @@
 <?php
-namespace Kernel\App\Common;
 
+namespace DavidNineRoc\EasyExtends\Foundation;
+
+use DavidNineRoc\EasyExtends\Contracts\Expand as ExpandContract;
 use Kernel\App\Exception\ConfigException;
-use Kernel\App\Http\Request;
 
-/**
- * 需要下载安装的扩展继承这个类
- * Class Extendtion
- * @package Kernel\App\Common
- */
-class Extendtion implements ExtendtionInterface
+
+class Expand implements ExpandContract
 {
     protected $mapUrl = array();
     // 扩展的 key

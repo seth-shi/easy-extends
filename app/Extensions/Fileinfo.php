@@ -1,6 +1,6 @@
 <?php
 
-namespace Kernel\App\Extensions;
+namespace DavidNineRoc\EasyExtends\Extensions;
 
 use Kernel\App\Common\Extendtion;
 

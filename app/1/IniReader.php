@@ -5,7 +5,7 @@
  * 读的时候，自动转换成bool值，不符合实际情况，稍加修改,读取的时候有多个 extends 多个键值会被覆盖
  */
 
-namespace Kernel\App\Util;
+namespace Kernel\App;
 use Kernel\App\Exception\ConfigException;
 
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Kernel\App\Common;
+namespace DavidNineRoc\EasyExtends\Contracts;
 
-interface ExtendtionInterface
+interface Expand
 {
     // 是否有这个扩展(符合本机配置的)
     public function hasExtend($key);

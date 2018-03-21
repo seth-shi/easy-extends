@@ -10,8 +10,21 @@
             "email": "1033404553@qq.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "DavidNineRoc\\EasyExtends\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.2"
     }
 }
