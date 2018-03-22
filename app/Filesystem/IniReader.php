@@ -30,12 +30,14 @@ class IniReader extends IniOperate
         $ini = $this->splitIniContentIntoLines($iniContent);
 
 
-        $section = '';
+        $section = '__';
+        $key = null;
         foreach ($ini as $line) {
 
             $line = (new Str($line))->trimSpace()->replaceSpace()->toString();
 
             if ($this->isComment($line)) {
+                $this->setComment($section, $line, $key);
                 continue;
             } elseif ($this->isSection($line)) {
                 $section = $this->getSectionName($line);

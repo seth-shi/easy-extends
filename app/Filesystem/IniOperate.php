@@ -8,6 +8,7 @@ use DavidNineRoc\EasyExtends\Support\Arr;
 
 class IniOperate
 {
+    const DELIMITER = '$';
     /**
      * ini 文件的路径
      * @var string
@@ -15,11 +16,12 @@ class IniOperate
     protected $iniFile;
 
 
+
     /**
      * 存储注释
      * @var array
      */
-    protected $iniComment = [];
+    protected $iniComments = [];
 
     /**
      * 存储 value 模块
@@ -60,6 +62,29 @@ class IniOperate
     protected function isSection($string)
     {
         return ($string{0} == '[');
+    }
+
+    /**
+     * 在 ini 的 values 中是否有 key 的 section 块
+     *
+     * @param $key
+     * @return bool
+     */
+    protected function hasSection($key)
+    {
+        return array_key_exists($key, $this->iniValues);
+    }
+
+    /**
+     * 在 values 块中寻找
+     *
+     * @param $section
+     * @param $key
+     * @return bool
+     */
+    protected function hasValues($section, $key)
+    {
+        return isset($this->iniValues[$section][$key]);
     }
 
     /**
@@ -119,10 +144,27 @@ class IniOperate
     }
 
 
+    /**
+     * 存储注释的内容
+     *
+     * @param $section
+     * @param $comment
+     * @param null $key
+     */
+    protected function setComment($section, $comment, $key = null)
+    {
+        if (! is_null($key)) {
+            $section = $section. self::DELIMITER .$key;
+        }
+
+        // 不论是否有一行或者多行的内容，总是存成数组的形式
+        $this->iniComments[$section][] = $comment;
+    }
+
     public function toString()
     {
         return [
-            'comment' => $this->iniComment,
+            'comment' => $this->iniComments,
             'values' => $this->iniValues,
         ];
     }
