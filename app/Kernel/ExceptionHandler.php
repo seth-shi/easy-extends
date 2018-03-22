@@ -2,19 +2,15 @@
 
 namespace DavidNineRoc\EasyExtends\Kernel;
 
-
-use DavidNineRoc\EasyExtends\Exception\ContainerException;
+use Exception;
 
 trait ExceptionHandler
 {
     protected function registerFatalHandler()
     {
-        register_shutdown_function(function () {
-            var_dump($lastError = error_get_last());
-        });
-
-        set_exception_handler(function (ContainerException $e) {
-            var_dump($e->getMessage());
+        set_exception_handler(function ($e) {
+            var_dump($e);
+            exit(0);
         });
     }
 

@@ -29,4 +29,10 @@ class Application extends Container
         $this->registerFatalHandler();
         $this->loadConfig();
     }
+
+
+    public function getBasePath()
+    {
+        return $this->basePath;
+    }
 }

@@ -3,7 +3,6 @@
 use DavidNineRoc\EasyExtends\Application;
 use DavidNineRoc\EasyExtends\Filesystem\Filesystem;
 use DavidNineRoc\EasyExtends\Filesystem\IniReader;
-use DavidNineRoc\EasyExtends\Filesystem\IniWriter;
 
 
 require __DIR__.'/../vendor/autoload.php';
@@ -18,6 +17,8 @@ $app = new Application(
 $app->bind(Filesystem::class, function (Application $app) {
     return new Filesystem();
 });
+
+var_dump((new IniReader($app->getBasePath() . '/php.ini'))->readIni($app->make(Filesystem::class)));
 
 // TODO
 return $app;
