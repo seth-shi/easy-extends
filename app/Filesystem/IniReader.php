@@ -46,6 +46,7 @@ class IniReader extends IniOperate
         $ini = $this->splitIniContentIntoLines($iniContent);
 
 
+        $section = '';
         foreach ($ini as $line) {
 
             $line = (new Str($line))->trimSpace()->replaceSpace()->toString();
@@ -54,12 +55,22 @@ class IniReader extends IniOperate
                 continue;
             } elseif ($this->isSection($line)) {
                 $section = $this->getSectionName($line);
-                $this->iniConfig[$section] = $section;
+                $this->setSection($section);
+                continue;
             }
+            /************************************
+             * 每个 section 下面会有多个 key=value
+             * 把他们存到 section 模块下面
+             */
+            list($key, $value) = explode('=', $line, 2);
 
+            $key = (new Str($key))->trimSpace()->replaceSpace()->toString();
+            $value = (new Str($value))->trimSpace()->replaceSpace()->toString();
+            $this->setValue($section, $key, $value);
         }
 
-        return [];
+
+        var_dump($this->iniValues['PHP']['extension']);
     }
 
     /**

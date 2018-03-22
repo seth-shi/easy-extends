@@ -14,11 +14,6 @@ class IniOperate
      */
     protected $iniFile;
 
-    /**
-     * 存储 section 模块
-     * @var array
-     */
-    protected $iniSections = [];
 
     /**
      * 存储 value 模块
@@ -41,7 +36,7 @@ class IniOperate
     protected function getSectionName($string)
     {
         if (
-            0 === preg_match('/\[(\S+)\]/', $string, $matches) ||
+            0 === preg_match('/\[([\s\S]+)\]/', $string, $matches) ||
             ! isset($matches[1]))
         {
             throw new ReadIniException("No [{$string}] section");
@@ -80,7 +75,6 @@ class IniOperate
      */
     protected function setSection($sectionName, $value = '')
     {
-        $this->iniSections[$sectionName] = $value;
         $this->iniValues[$sectionName] = [];
     }
 
@@ -108,13 +102,11 @@ class IniOperate
             /****************************************
              * 第一次重复是字符串，之后的重复是数组，统一
              * 转换成数组来进行处理。
-             * 清空当前数组，重新植入元素
+             * 当成为数组之后，把重复 key 值的插入数组中
              */
-            $values = Arr::wrap($this->iniValues[$section][$key]);
-            $this->iniValues[$section][$key] = [];
-            foreach ($values as $value) {
-                $this->iniValues[$section][$key][] = $value;
-            }
+            $this->iniValues[$section][$key] = Arr::wrap($this->iniValues[$section][$key]);
+            $this->iniValues[$section][$key][] = $value;
+
         } else {
             $this->iniValues[$section][$key] = $value;
         }
