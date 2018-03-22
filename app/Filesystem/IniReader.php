@@ -11,12 +11,11 @@ class IniReader extends IniOperate
      * @param Filesystem $filesystem
      * @return array
      */
-    public function readIni(Filesystem $filesystem)
+    public function parse(Filesystem $filesystem)
     {
         $iniContent = $filesystem->get($this->iniFile);
 
-
-        return $this->readString($iniContent);
+        return $this->readIniString($iniContent);
     }
 
     /**
@@ -25,24 +24,9 @@ class IniReader extends IniOperate
      * @param $iniContent
      * @return array
      */
-    protected function readString($iniContent)
+    protected function readIniString($iniContent)
     {
-        // 最后加一个换行，切割方便
         $iniContent .= "\n";
-
-        $array = $this->readStringToArray($iniContent);
-
-        return $array;
-    }
-
-    /**
-     * 从字符串中解析 ini 内容成为数组
-     *
-     * @param $iniContent
-     * @return array
-     */
-    protected function readStringToArray($iniContent)
-    {
         $ini = $this->splitIniContentIntoLines($iniContent);
 
 
@@ -69,8 +53,7 @@ class IniReader extends IniOperate
             $this->setValue($section, $key, $value);
         }
 
-
-        var_dump($this->iniValues['PHP']['extension']);
+        return $this->iniValues;
     }
 
     /**

@@ -69,15 +69,23 @@ class Container implements ContainerContract
      */
     public function call($abstract, $method)
     {
-        if (! is_object($abstract)) {
-            $this->make($abstract);
+        /************************************
+         * 如果传入的是一个对象，则直接跳出，
+         * 不然，则通过 make 方法得到一个对象
+         */
+        do {
+            if (is_object($abstract)) {
+                break;
+            }
+
+            $abstract = $this->make($abstract);
+        } while (false);
+
+        if (! method_exists($abstract, $method)) {
+            throw new ContainerException("[{$abstract}] Class not exists [{$method}] method!");
         }
 
-        if (! method_exists($this->instances[$abstract], $method)) {
-            throw new ContainerException("[{$abstract}] Class not rxists [{$method}] method!");
-        }
-
-        $this->reflectionMethod($this->instances[$abstract], $method);
+        return $this->reflectionMethod($abstract, $method);
     }
 
     /**

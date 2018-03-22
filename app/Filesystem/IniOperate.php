@@ -16,6 +16,12 @@ class IniOperate
 
 
     /**
+     * 存储注释
+     * @var array
+     */
+    protected $iniComment = [];
+
+    /**
      * 存储 value 模块
      * @var array
      */
@@ -110,5 +116,14 @@ class IniOperate
         } else {
             $this->iniValues[$section][$key] = $value;
         }
+    }
+
+
+    public function toString()
+    {
+        return [
+            'comment' => $this->iniComment,
+            'values' => $this->iniValues,
+        ];
     }
 }

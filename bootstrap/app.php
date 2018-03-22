@@ -17,8 +17,10 @@ $app = new Application(
 $app->bind(Filesystem::class, function (Application $app) {
     return new Filesystem();
 });
+$app->bind(IniReader::class, function (Application $app) {
+    return new IniReader($app->getphpIniPath());
+});
 
-var_dump((new IniReader($app->getBasePath() . '/php.ini'))->readIni($app->make(Filesystem::class)));
+ // var_dump((new IniReader($app->getBasePath() . '/php.ini'))->parse($app->make(Filesystem::class)));
 
-// TODO
 return $app;
