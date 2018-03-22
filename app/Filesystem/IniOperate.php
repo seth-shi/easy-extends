@@ -4,6 +4,7 @@ namespace DavidNineRoc\EasyExtends\Filesystem;
 
 
 use DavidNineRoc\EasyExtends\Exception\ReadIniException;
+use DavidNineRoc\EasyExtends\Support\Arr;
 
 class IniOperate
 {
@@ -83,6 +84,14 @@ class IniOperate
         $this->iniValues[$sectionName] = [];
     }
 
+    /**
+     * 为 section 设置模块
+     *
+     * @param $section
+     * @param $key
+     * @param $value
+     * @return ReadIniException
+     */
     protected function setValue($section, $key, $value)
     {
         if (! array_key_exists($section, $this->iniValues)) {
@@ -94,16 +103,20 @@ class IniOperate
          * extension=redis.dll
          * extension=pdo_mysql.dll
          * extension=memcache.dll
-         * 如果存在，把原来的值和 value 形成数组重新
-         * 插入
          */
         if (isset($this->iniValues[$section][$key])) {
-            $this->iniValues[$section][$key] = [
-                $this->iniValues[$section][$key],
-                $value
-            ];
+            /****************************************
+             * 第一次重复是字符串，之后的重复是数组，统一
+             * 转换成数组来进行处理。
+             * 清空当前数组，重新植入元素
+             */
+            $values = Arr::wrap($this->iniValues[$section][$key]);
+            $this->iniValues[$section][$key] = [];
+            foreach ($values as $value) {
+                $this->iniValues[$section][$key][] = $value;
+            }
+        } else {
+            $this->iniValues[$section][$key] = $value;
         }
-
-        $this->iniValues[$section][$key] = $value;
     }
 }

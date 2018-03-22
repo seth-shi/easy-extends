@@ -19,4 +19,15 @@ class Arr
         $this->realArray = $array;
         $this->array = $array;
     }
+
+    /**
+     * 如果给定的值不是数组，则将其包装在一个数组中。
+     *
+     * @param  mixed  $value
+     * @return array
+     */
+    public static function wrap($value)
+    {
+        return ! is_array($value) ? [$value] : $value;
+    }
 }
