@@ -1,10 +1,10 @@
 <?php
 
-namespace Kernel\App\Extensions;
+namespace DavidNineRoc\EasyExtends\Extensions;
 
-use Kernel\App\Common\Extendtion;
+use DavidNineRoc\EasyExtends\Foundation\Expand;
 
-class Sphinx extends Extendtion
+class Sphinx extends Expand
 {
     protected $mapUrl = array(
         '5.6-nts-vc11-x86' => 'http://windows.php.net/downloads/pecl/releases/sphinx/1.3.3/php_sphinx-1.3.3-5.6-nts-vc11-x86.zip',

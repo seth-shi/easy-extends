@@ -1,10 +1,10 @@
 <?php
 
-namespace Kernel\App\Extensions;
+namespace DavidNineRoc\EasyExtends\Extensions;
 
-use Kernel\App\Common\Extendtion;
+use DavidNineRoc\EasyExtends\Foundation\Expand;
 
-class Xdebug extends Extendtion
+class Xdebug extends Expand
 {
     protected $mapUrl = array(
         '7.1-nts-vc14-x86' => 'http://windows.php.net/downloads/pecl/releases/xdebug/2.5.5/php_xdebug-2.5.5-7.1-nts-vc14-x86.zip',

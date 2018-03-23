@@ -1,14 +1,14 @@
 <?php
 
-namespace Kernel\App\Extensions;
+namespace DavidNineRoc\EasyExtends\Extensions;
 
-use Kernel\App\Common\Extendtion;
+use DavidNineRoc\EasyExtends\Foundation\Expand;
 
 /**
  * 打开扩展之后需要安装oralce Instant Client
  * Class Oci8.
  */
-class Oci8 extends Extendtion
+class Oci8 extends Expand
 {
     protected $mapUrl = array(
         '7.1-nts-vc14-x86' => 'http://windows.php.net/downloads/pecl/releases/oci8/2.1.7/php_oci8-2.1.7-7.1-nts-vc14-x86.zip',

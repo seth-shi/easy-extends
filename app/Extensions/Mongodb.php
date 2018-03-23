@@ -1,10 +1,10 @@
 <?php
 
-namespace Kernel\App\Extensions;
+namespace DavidNineRoc\EasyExtends\Extensions;
 
-use Kernel\App\Common\Extendtion;
+use DavidNineRoc\EasyExtends\Foundation\Expand;
 
-class Mongodb extends Extendtion
+class Mongodb extends Expand
 {
     protected $mapUrl = array(
         '7.1-nts-vc14-x86' => 'http://windows.php.net/downloads/pecl/releases/mongodb/1.3.0RC1/php_mongodb-1.3.0rc1-7.1-nts-vc14-x86.zip',

@@ -1,14 +1,14 @@
 <?php
 
-namespace Kernel\App\Extensions;
+namespace DavidNineRoc\EasyExtends\Extensions;
 
-use Kernel\App\Common\Extendtion;
+use DavidNineRoc\EasyExtends\Foundation\Expand;
 
 /**
  * CURL 没找到 dll 文件，应该是默认安装 PHP 时就有的
  * Class Curl.
  */
-class Mbsring extends Extendtion
+class Mbsring extends Expand
 {
     // 打开的扩展名
     protected $dllName = 'php_mbstring.dll';

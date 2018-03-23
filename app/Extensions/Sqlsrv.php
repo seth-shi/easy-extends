@@ -1,10 +1,9 @@
 <?php
 
-namespace Kernel\App\Extensions;
+namespace DavidNineRoc\EasyExtends\Extensions;
 
-use Kernel\App\Common\Extendtion;
-
-class Sqlsrv extends Extendtion
+use DavidNineRoc\EasyExtends\Foundation\Expand;
+class Sqlsrv extends Expand
 {
     protected $mapUrl = array(
         '7.1-nts-vc14-x86' => 'http://windows.php.net/downloads/pecl/releases/sqlsrv/5.0.0preview/php_sqlsrv-5.0.0preview-7.1-nts-vc14-x86.zip',

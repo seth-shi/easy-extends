@@ -1,10 +1,9 @@
 <?php
 
-namespace Kernel\App\Extensions;
+namespace DavidNineRoc\EasyExtends\Extensions;
 
-use Kernel\App\Common\Extendtion;
-
-class Memcache extends Extendtion
+use DavidNineRoc\EasyExtends\Foundation\Expand;
+class Memcache extends Expand
 {
     protected $mapUrl = array(
         '5.6-nts-vc11-x86' => 'http://windows.php.net/downloads/pecl/releases/memcache/3.0.8/php_memcache-3.0.8-5.6-nts-vc11-x86.zip',

@@ -2,6 +2,7 @@
 
 namespace DavidNineRoc\EasyExtends;
 
+use DavidNineRoc\EasyExtends\Kernel\Command;
 use DavidNineRoc\EasyExtends\Kernel\Container;
 use DavidNineRoc\EasyExtends\Kernel\Env;
 use DavidNineRoc\EasyExtends\Kernel\ExceptionHandler;
@@ -9,7 +10,7 @@ use DavidNineRoc\EasyExtends\Kernel\ExceptionHandler;
 
 class Application extends Container
 {
-    use Env, ExceptionHandler;
+    use Env, Command, ExceptionHandler;
 
     // 版本号
     const VERSION = '1.1.2';

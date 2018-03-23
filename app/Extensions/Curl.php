@@ -2,11 +2,13 @@
 
 namespace DavidNineRoc\EasyExtends\Extensions;
 
+use DavidNineRoc\EasyExtends\Foundation\Expand;
+
 /**
  * CURL 没找到 dll 文件，应该是默认安装 PHP 时就有的
  * Class Curl.
  */
-class Curl extends Extendtion
+class Curl extends Expand
 {
     // 打开的扩展名
     protected $dllName = 'php_curl.dll';

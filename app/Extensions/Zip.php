@@ -1,10 +1,10 @@
 <?php
 
-namespace Kernel\App\Extensions;
+namespace DavidNineRoc\EasyExtends\Extensions;
 
-use Kernel\App\Common\Extendtion;
+use DavidNineRoc\EasyExtends\Foundation\Expand;
 
-class Zip extends Extendtion
+class Zip extends Expand
 {
     protected $mapUrl = array(
         '7.1-nts-vc14-x86' => 'http://windows.php.net/downloads/pecl/releases/zip/1.13.5/php_zip-1.13.5-7.1-nts-vc14-x86.zip',

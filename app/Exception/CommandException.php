@@ -3,6 +3,6 @@
 namespace DavidNineRoc\EasyExtends\Exception;
 
 
-class StringException extends EasyExtendsException
+class CommandException extends EasyExtendsException
 {
 }

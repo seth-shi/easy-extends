@@ -1,10 +1,9 @@
 <?php
 
-namespace Kernel\App\Extensions;
+namespace DavidNineRoc\EasyExtends\Extensions;
 
-use Kernel\App\Common\Extendtion;
-
-class Mongo extends Extendtion
+use DavidNineRoc\EasyExtends\Foundation\Expand;
+class Mongo extends Expand
 {
     protected $mapUrl = array(
         '5.6-nts-vc11-x86' => 'http://windows.php.net/downloads/pecl/releases/mongo/1.6.16/php_mongo-1.6.16-5.6-nts-vc11-x86.zip',

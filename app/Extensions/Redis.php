@@ -1,10 +1,10 @@
 <?php
 
-namespace Kernel\App\Extensions;
+namespace DavidNineRoc\EasyExtends\Extensions;
 
-use Kernel\App\Common\Extendtion;
+use DavidNineRoc\EasyExtends\Foundation\Expand;
 
-class Redis extends Extendtion
+class Redis extends Expand
 {
     protected $mapUrl = array(
         '7.1-nts-vc14-x86' => 'http://windows.php.net/downloads/pecl/releases/redis/3.1.4RC3/php_redis-3.1.4rc3-7.1-nts-vc14-x86.zip',

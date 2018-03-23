@@ -2,8 +2,9 @@
 
 namespace DavidNineRoc\EasyExtends\Kernel;
 
-use Kernel\App\Exception\ConfigException;
-use Kernel\App\Exception\NotExtensionDirException;
+use DavidNineRoc\EasyExtends\Exception\ConfigException;
+use DavidNineRoc\EasyExtends\Exception\NotExtensionDirException;
+
 
 trait Env
 {
@@ -163,6 +164,11 @@ trait Env
     public function getExtPath()
     {
         return $this->extPath;
+    }
+
+    public function getEnv()
+    {
+        return "{$this->phpVersion}-{$this->ntsVersion}-{$this->vcVersion}-{$this->winVersion}";
     }
 
     /**

@@ -1,10 +1,10 @@
 <?php
 
-namespace Kernel\App\Extensions;
+namespace DavidNineRoc\EasyExtends\Extensions;
 
-use Kernel\App\Common\Extendtion;
+use DavidNineRoc\EasyExtends\Foundation\Expand;
 
-class Opcache extends Extendtion
+class Opcache extends Expand
 {
     protected $mapUrl = array(
         '5.5-nts-vc11-x86' => 'http://windows.php.net/downloads/pecl/releases/opcache/7.0.4/php_opcache-7.0.4-5.5-nts-vc11-x86.zip',

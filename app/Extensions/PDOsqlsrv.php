@@ -1,10 +1,10 @@
 <?php
 
-namespace Kernel\App\Extensions;
+namespace DavidNineRoc\EasyExtends\Extensions;
 
-use Kernel\App\Common\Extendtion;
+use DavidNineRoc\EasyExtends\Foundation\Expand;
 
-class PDOsqlsrv extends Extendtion
+class PDOsqlsrv extends Expand
 {
     protected $mapUrl = array(
         '7.1-nts-vc14-x86' => 'http://windows.php.net/downloads/pecl/releases/pdo_sqlsrv/5.0.0preview/php_pdo_sqlsrv-5.0.0preview-7.1-nts-vc14-x86.zip',

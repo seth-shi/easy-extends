@@ -22,7 +22,9 @@
     },
     "minimum-stability": "dev",
     "require": {
-        "php": ">=5.3"
+        "php": ">=5.3",
+        "davidnineroc/ini-parse-render": "dev-master",
+        "php-curl-class/php-curl-class": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.2"
