@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "202555f17a3fe41a0472db28a706514b",
+    "content-hash": "282d8bddc515232169c79c86a6e97d47",
     "packages": [
         {
             "name": "davidnineroc/ini-parse-render",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/DavidNineRoc/ini-parse-render.git",
-                "reference": "32071a8839ed8b55560a66eac4f168ed0e158fa7"
+                "reference": "dd6cf499a8f5f3a6c98cbc44f27ca29abff9eadb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/DavidNineRoc/ini-parse-render/32071a8839ed8b55560a66eac4f168ed0e158fa7.zip",
-                "reference": "32071a8839ed8b55560a66eac4f168ed0e158fa7",
+                "url": "https://files.phpcomposer.com/files/DavidNineRoc/ini-parse-render/dd6cf499a8f5f3a6c98cbc44f27ca29abff9eadb.zip",
+                "reference": "dd6cf499a8f5f3a6c98cbc44f27ca29abff9eadb",
                 "shasum": ""
             },
             "require-dev": {
@@ -48,85 +48,30 @@
                 "read ini",
                 "write ini"
             ],
-            "time": "2018-03-23T09:56:32+00:00"
+            "time": "2018-03-23T15:17:09+00:00"
         },
         {
-            "name": "php-curl-class/php-curl-class",
+            "name": "wenpeng/curl",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/php-curl-class/php-curl-class.git",
-                "reference": "83cd9d14eeaa223cdcf47de96812551fde80c986"
+                "url": "https://github.com/wenpeng/curl.git",
+                "reference": "ab270b31af9876d73c4321a1b36f7d66cfa7624d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/php-curl-class/php-curl-class/83cd9d14eeaa223cdcf47de96812551fde80c986.zip",
-                "reference": "83cd9d14eeaa223cdcf47de96812551fde80c986",
+                "url": "https://files.phpcomposer.com/files/wenpeng/curl/ab270b31af9876d73c4321a1b36f7d66cfa7624d.zip",
+                "reference": "ab270b31af9876d73c4321a1b36f7d66cfa7624d",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "php": ">=5.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "*",
-                "squizlabs/php_codesniffer": "*"
+                "php": ">=5.1"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Curl\\": "src/Curl/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Unlicense"
-            ],
-            "authors": [
-                {
-                    "name": "Zach Borboa"
-                }
-            ],
-            "description": "PHP Curl Class makes it easy to send HTTP requests and integrate with web APIs.",
-            "homepage": "https://github.com/php-curl-class/php-curl-class",
-            "keywords": [
-                "api",
-                "class",
-                "client",
-                "curl",
-                "framework",
-                "http",
-                "http client",
-                "json",
-                "php",
-                "requests",
-                "rest",
-                "restful",
-                "web service",
-                "xml"
-            ],
-            "time": "2018-03-07T06:17:38+00:00"
-        }
-    ],
-    "packages-dev": [
-        {
-            "name": "austinhyde/iniparser",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/austinhyde/IniParser.git",
-                "reference": "3b5a925ac99619d198d8ff93958913ca3311f266"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/austinhyde/IniParser/3b5a925ac99619d198d8ff93958913ca3311f266.zip",
-                "reference": "3b5a925ac99619d198d8ff93958913ca3311f266",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "IniParser": "src/"
+                    "Wenpeng\\Curl\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -135,21 +80,24 @@
             ],
             "authors": [
                 {
-                    "name": "Till Klampaeckel",
-                    "email": "till@php.net",
-                    "homepage": "http://till.klampaeckel.de/"
-                },
-                {
-                    "name": "Austin Hyde",
-                    "email": "austin109@gmail.com"
+                    "name": "Wenpeng",
+                    "email": "imwwp@outlook.com"
                 }
             ],
-            "description": "A Zend_Config_Ini like parser for .ini files.",
+            "description": "一个轻量级的PHP网络操作类，实现GET、POST、UPLOAD、DOWNLOAD常用操作，出错自动重试，支持链式写法",
+            "homepage": "https://github.com/wenpeng/curl",
             "keywords": [
-                "configuration"
+                "PHP cURL",
+                "curl download",
+                "curl library",
+                "curl lightweight",
+                "curl post",
+                "curl upload"
             ],
-            "time": "2014-04-12T14:28:42+00:00"
-        },
+            "time": "2018-02-02T19:22:20+00:00"
+        }
+    ],
+    "packages-dev": [
         {
             "name": "doctrine/instantiator",
             "version": "dev-master",
@@ -959,96 +907,6 @@
             "time": "2018-01-07T17:10:51+00:00"
         },
         {
-            "name": "retrinko/ini",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/retrinko/ini.git",
-                "reference": "3c323527c045be5dfdd43840d1fe9d02cf9a5520"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/retrinko/ini/3c323527c045be5dfdd43840d1fe9d02cf9a5520.zip",
-                "reference": "3c323527c045be5dfdd43840d1fe9d02cf9a5520",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Retrinko\\Ini\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Miguel Ángel Graña",
-                    "email": "miguel.mailbox@gmail.com"
-                }
-            ],
-            "description": "Library for parsing and writing INI files",
-            "keywords": [
-                "file",
-                "ini",
-                "parse",
-                "read",
-                "write"
-            ],
-            "time": "2016-07-08T08:06:26+00:00"
-        },
-        {
-            "name": "sagephp/ini",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SagePHP/ini.git",
-                "reference": "a59b8ff4faefcd6868d736c40187a554e66ce4b3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/SagePHP/ini/a59b8ff4faefcd6868d736c40187a554e66ce4b3.zip",
-                "reference": "a59b8ff4faefcd6868d736c40187a554e66ce4b3",
-                "shasum": ""
-            },
-            "require-dev": {
-                "symfony/class-loader": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nuno Costa",
-                    "email": "nuno@francodacosta.com",
-                    "homepage": "http://www.francodacosta.com"
-                }
-            ],
-            "description": "Ini file manipulation. supports sections and comments",
-            "keywords": [
-                "configuration",
-                "ini",
-                "ini file",
-                "parser",
-                "php"
-            ],
-            "time": "2013-11-15T21:30:52+00:00"
-        },
-        {
             "name": "sebastian/code-unit-reverse-lookup",
             "version": "dev-master",
             "source": {
@@ -1211,16 +1069,16 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "3.1.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "cd0871b3975fb7fc44d11314fd1ee20925fce4f5"
+                "reference": "cd35e43a53ec1c10424a5dec250c30e952e09ced"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/sebastianbergmann/environment/cd0871b3975fb7fc44d11314fd1ee20925fce4f5.zip",
-                "reference": "cd0871b3975fb7fc44d11314fd1ee20925fce4f5",
+                "url": "https://files.phpcomposer.com/files/sebastianbergmann/environment/cd35e43a53ec1c10424a5dec250c30e952e09ced.zip",
+                "reference": "cd35e43a53ec1c10424a5dec250c30e952e09ced",
                 "shasum": ""
             },
             "require": {
@@ -1257,7 +1115,7 @@
                 "environment",
                 "hhvm"
             ],
-            "time": "2017-07-01T08:51:00+00:00"
+            "time": "2018-03-21T07:21:42+00:00"
         },
         {
             "name": "sebastian/exporter",
@@ -1702,7 +1560,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "davidnineroc/ini-parse-render": 20,
-        "php-curl-class/php-curl-class": 20
+        "wenpeng/curl": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

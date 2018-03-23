@@ -168,7 +168,7 @@ trait Env
 
     public function getEnv()
     {
-        return "{$this->phpVersion}-{$this->ntsVersion}-{$this->vcVersion}-{$this->winVersion}";
+        return strtolower("{$this->phpVersion}-{$this->ntsVersion}-{$this->vcVersion}-{$this->winVersion}");
     }
 
     /**

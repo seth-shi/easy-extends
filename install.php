@@ -18,4 +18,3 @@ $extension = $app->getExtension($argv);
  * @var $extension \DavidNineRoc\EasyExtends\Foundation\Expand
  */
 $extension->installExtend($app->getEnv());
-dd($extension);
