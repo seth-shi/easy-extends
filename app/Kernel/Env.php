@@ -27,20 +27,20 @@ trait Env
     protected $winVersion;
 
     /**
-     * 注册基础配置
-     * Config constructor.
+     * 加载当前环境变量，包括 php 版本，
      */
-    public function loadConfig()
+    public function loadCurrentEnv()
     {
         $this->checkConfig();
+
         $this->setIniInfo();
 
-        // 注册 phpinfo 信息
         $this->setBaseConfig();
     }
 
     /**
      * 检查 php.ini 是否有配置.
+     * 扩展目录是否已经可以读取
      *
      * @throws ConfigException
      */
@@ -54,7 +54,8 @@ trait Env
     }
 
     /**
-     * 设置当前扩展的目录，当前 phpini 的文件路径.
+     * 设置当前扩展的目录，
+     * 当前 phpini 的文件路径.
      */
     protected function setIniInfo()
     {
@@ -64,7 +65,7 @@ trait Env
     }
 
     /**
-     * 通过 phpinfo 的信息设置到内部属性.
+     * 捕捉 phpinfo 的信息设置到内部属性.
      *
      * @throws ConfigException
      */

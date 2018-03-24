@@ -26,12 +26,28 @@ class Application extends Container
         if (!is_null($basePath)) {
             $this->basePath = $basePath;
         }
+
+        /**
+         * 设置自己为单例，方便调用
+         */
         $this->setInstance($this);
+
+        /**
+         * 注册异常，捕获控制台可能出现的异常
+         */
         $this->registerFatalHandler();
-        $this->loadConfig();
+
+        /**
+         * 加载当前环境变量，包括 php 版本，
+         * vc 版本，nts, win 版本
+         */
+        $this->loadCurrentEnv();
     }
 
 
+    /**
+     * @return string
+     */
     public function getBasePath()
     {
         return $this->basePath;

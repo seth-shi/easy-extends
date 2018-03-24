@@ -1,10 +1,12 @@
 <?php
 
 use DavidNineRoc\EasyExtends\Application;
+use DavidNineRoc\EasyExtends\Support\Config;
 use DavidNineRoc\IniParseRender\IniManager;
 
 require __DIR__.'/helpers.php';
 require __DIR__.'/../vendor/autoload.php';
+
 
 
 $app = new Application(

@@ -6,6 +6,7 @@ use DavidNineRoc\EasyExtends\Application;
 use DavidNineRoc\EasyExtends\Contracts\Expand as ExpandContract;
 use DavidNineRoc\EasyExtends\Exception\DownloadExtensionException;
 use DavidNineRoc\EasyExtends\Exception\NotExtensionDirException;
+use DavidNineRoc\EasyExtends\Support\Request;
 use Wenpeng\Curl\Curl;
 
 class Expand implements ExpandContract
@@ -21,7 +22,7 @@ class Expand implements ExpandContract
     public function __construct(Application $app)
     {
         $this->app = $app;
-        $this->cachePath = $this->app->getBasePath().'/bootstrap/cache';
+        $this->cachePath = $this->app->getBasePath()."/bootstrap/cache";
     }
 
     public function installExtend($env)
@@ -49,17 +50,8 @@ class Expand implements ExpandContract
     protected function downloadExtend($env)
     {
         $url = $this->mapUrl[$env];
-        $extendPath = $this->cachePath.'/'.basename($url);
-        dd($url);
 
-        $curl = new Curl();
-        $curl->url($url)->save($extendPath);
-
-        if ($curl->error()) {
-            throw new DownloadExtensionException($curl->message());
-        }
-
-        return $extendPath;
+        return (new Request())->download($url, $this->cachePath);
     }
 
 }

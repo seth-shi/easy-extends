@@ -3,6 +3,7 @@
 namespace DavidNineRoc\EasyExtends\Kernel;
 
 use Closure;
+use DavidNineRoc\EasyExtends\Application;
 use DavidNineRoc\EasyExtends\Contracts\Container as ContainerContract;
 use DavidNineRoc\EasyExtends\Exception\ContainerException;
 use ReflectionMethod;
@@ -101,7 +102,7 @@ class Container implements ContainerContract
 
     /**
      * 获取 Container 实例
-     * @return Container
+     * @return Application
      */
     public static function getInstance()
     {
