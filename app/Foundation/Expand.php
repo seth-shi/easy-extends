@@ -109,7 +109,11 @@ class Expand implements ExpandContract
          * @var IniManager
          */
         $ini = $this->app->make(IniManager::class);
-        $ini->set('PHP', 'extension', $this->dllName);
+
+        // 如果已经存在了的，不需要开启
+        if (! in_array($this->dllName, $ini->get('PHP', 'extension'))) {
+            $ini->set('PHP', 'extension', $this->dllName);
+        }
         $ini->write();
         print "[$this->dllName] extension open success!!!";
     }

@@ -54,9 +54,9 @@ php install rollback
 * curl
 * fileinfo
 * gd2
-* pdo-mssql
-* pdo-mysql
-* pdo-sqlite
+* pdomssql
+* pdomysql
+* pdosqlite
 * mbstring
 * memcache
 * mongo
@@ -73,7 +73,6 @@ php install rollback
 * xdebug
 * zip
 
-* rollback
 ## Errors
 * php 既不是内部命令也不知可执行程序
     * 需注册[php环境变量](http://blog.shiguopeng.cn/article/10201.html)
