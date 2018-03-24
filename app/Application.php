@@ -41,6 +41,7 @@ class Application extends Container
          * 加载当前环境变量，包括 php 版本，
          * vc 版本，nts, win 版本
          */
+        $this->registerEnv();
         $this->loadCurrentEnv();
     }
 

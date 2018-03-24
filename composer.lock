@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b6c169a7c076ac4ed27f5eb39481ed6c",
+    "content-hash": "0ac9236e26cfe296f8dff0ee0c4890e3",
     "packages": [
         {
             "name": "dariuszp/cli-progress-bar",
@@ -274,6 +274,51 @@
                 "psr-3"
             ],
             "time": "2016-10-10T12:19:37+00:00"
+        },
+        {
+            "name": "vipsoft/unzip",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vipsoft/Unzip.git",
+                "reference": "657cda91648db84b8882e6ac881e2fd439bbe82c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/vipsoft/Unzip/657cda91648db84b8882e6ac881e2fd439bbe82c.zip",
+                "reference": "657cda91648db84b8882e6ac881e2fd439bbe82c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-zip": "*",
+                "php": ">=5.3.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "VIPSoft\\Unzip": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anthon Pang",
+                    "email": "apang@softwaredevelopment.ca",
+                    "role": "developer"
+                }
+            ],
+            "description": "Unzip library - a ZipArchive wrapper",
+            "homepage": "http://github.com/vipsoft/",
+            "keywords": [
+                "pclzip",
+                "unzip",
+                "zip",
+                "ziparchive"
+            ],
+            "time": "2016-02-16T04:29:22+00:00"
         }
     ],
     "packages-dev": [
@@ -1741,7 +1786,8 @@
         "davidnineroc/ini-parse-render": 20,
         "filp/whoops": 20,
         "monolog/monolog": 20,
-        "dariuszp/cli-progress-bar": 20
+        "dariuszp/cli-progress-bar": 20,
+        "vipsoft/unzip": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

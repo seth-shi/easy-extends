@@ -3,7 +3,6 @@
 namespace DavidNineRoc\EasyExtends\Support;
 
 use DavidNineRoc\EasyExtends\Exception\DownloadExtensionException;
-use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Dariuszp\CliProgressBar;
 
@@ -20,6 +19,7 @@ class Request
     protected $downing = false;
     protected $downloaded = false;
 
+
     public function __construct()
     {
         $this->bar = new CliProgressBar(100);
@@ -29,13 +29,20 @@ class Request
 
     public function download($url, $savePath)
     {
-        $saveFile = trim($savePath, '\\\/').'/'.basename($url);
-        $fp = fopen($saveFile, 'w+');
+        $savePath = trim($savePath, '\\\/').'/'.basename($url);
+
 
         // 下载文件
-        $this->requestUrl($url, $fp);
+        $stream = $this->requestUrl($url);
+        /**
+         * 有些扩展下载会导致重定向，在文件头会有一些
+         * 稀奇古怪的东西，导致解压 zip 文件出错，所
+         * 以，我们去除掉那些东西 zip 文件是以 pk 开
+         * 头
+         */
+        $stream = strstr($stream, 'PK');
+        file_put_contents($savePath, $stream);
 
-        fclose($fp);
         /**
          * 下载结束的进度条显示
          */
@@ -44,17 +51,17 @@ class Request
         $this->bar->display();
         $this->bar->end();
 
-        return $saveFile;
+        return $savePath;
     }
 
 
     /**
      * 请求 URL 下载
      * @param $url
-     * @param $fp
+     * @return mixed
      * @throws DownloadExtensionException
      */
-    protected function requestUrl($url, $fp)
+    protected function requestUrl($url)
     {
         $ch = curl_init();
 
@@ -71,15 +78,15 @@ class Request
         curl_setopt($ch, CURLOPT_NOPROGRESS, 0);
         curl_setopt($ch, CURLOPT_PROGRESSFUNCTION, [$this, 'progress']);
         curl_setopt($ch, CURLE_ABORTED_BY_CALLBACK , [$this, 'progressAbort']);
-        // 不输出到浏览器，而是文件
-        curl_setopt($ch, CURLOPT_FILE, $fp);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 
-        if (curl_exec($ch) === false) {
+        if (($stream = curl_exec($ch)) === false) {
             throw new DownloadExtensionException(curl_errno($ch));
         }
 
         curl_close($ch);
+
+        return $stream;
     }
 
     protected function progressAbort()

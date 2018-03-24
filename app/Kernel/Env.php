@@ -27,9 +27,18 @@ trait Env
     protected $winVersion;
 
     /**
+     * 脚本下的运行注册几个还几个变量
+     * 内存大小限制开大点
+     */
+    protected function registerEnv()
+    {
+        ini_set('memory_limit', '30M');
+    }
+
+    /**
      * 加载当前环境变量，包括 php 版本，
      */
-    public function loadCurrentEnv()
+    protected function loadCurrentEnv()
     {
         $this->checkConfig();
 
