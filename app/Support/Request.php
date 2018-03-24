@@ -8,10 +8,6 @@ use Monolog\Logger;
 
 class Request
 {
-    /**
-     * @var Logger
-     */
-    protected $log;
 
     /**
      * @var CliProgressBar
@@ -110,7 +106,6 @@ class Request
      */
     protected function progress($ch, $countDownloadSize, $currentDownloadSize, $countUploadSize, $currentUploadSize)
     {
-        //$this->log->info("{$countDownloadSize}：{$currentDownloadSize}");
         // 等于 0 的时候，应该是预读资源不等于 0的时候即开始下载
         if (0 === $countDownloadSize) {
             return false;
