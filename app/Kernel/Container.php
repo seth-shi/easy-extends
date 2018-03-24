@@ -74,6 +74,7 @@ class Container implements ContainerContract
      * @param $abstract
      * @param $method
      *
+     * @return mixed
      * @throws ContainerException
      */
     public function call($abstract, $method)

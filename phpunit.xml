@@ -5,4 +5,8 @@
             <directory>tests</directory>
         </testsuite>
     </testsuites>
+    <php>
+        <env name="Architecture" value="x86"/>
+        <env name="PHP Extension Build" value="vc14"/>
+    </php>
 </phpunit>
