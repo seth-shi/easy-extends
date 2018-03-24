@@ -11,7 +11,9 @@ use ReflectionMethod;
 class Container implements ContainerContract
 {
     protected static $instance;
+
     protected $binds = [];
+
     protected $instances = [];
 
     public function has($key)
@@ -25,7 +27,8 @@ class Container implements ContainerContract
     }
 
     /**
-     * 绑定一个实例
+     * 绑定一个实例.
+     *
      * @param $abstract
      * @param Closure $contract
      */
@@ -36,14 +39,17 @@ class Container implements ContainerContract
 
     /**
      * 生成类对象
+     *
      * @param $abstract
      * @param bool $share
+     *
      * @return mixed
+     *
      * @throws ContainerException
      */
     public function make($abstract, $share = true)
     {
-        if (! $this->has($abstract)) {
+        if (!$this->has($abstract)) {
             throw new ContainerException("Not [{$abstract}] class resolve");
         }
 
@@ -53,8 +59,8 @@ class Container implements ContainerContract
          * 不是单例，也强制实例化一个对象
          */
         if (
-            ! array_key_exists($abstract, $this->instances) ||
-            ! $share
+            !array_key_exists($abstract, $this->instances) ||
+            !$share
         ) {
             $this->resolve($abstract);
         }
@@ -63,9 +69,11 @@ class Container implements ContainerContract
     }
 
     /**
-     * 执行对象的一个方法
+     * 执行对象的一个方法.
+     *
      * @param $abstract
      * @param $method
+     *
      * @throws ContainerException
      */
     public function call($abstract, $method)
@@ -82,7 +90,7 @@ class Container implements ContainerContract
             $abstract = $this->make($abstract);
         } while (false);
 
-        if (! method_exists($abstract, $method)) {
+        if (!method_exists($abstract, $method)) {
             throw new ContainerException("[{$abstract}] Class not exists [{$method}] method!");
         }
 
@@ -92,7 +100,8 @@ class Container implements ContainerContract
     /**
      * 简单的解析类，在 Container::bind() 里必须
      * 强制类型，第一个 key 随意，第二个参数必须是
-     * 一个闭包，而且有一个参数 Container::class
+     * 一个闭包，而且有一个参数 Container::class.
+     *
      * @param $abstract
      */
     protected function resolve($abstract)
@@ -101,7 +110,8 @@ class Container implements ContainerContract
     }
 
     /**
-     * 获取 Container 实例
+     * 获取 Container 实例.
+     *
      * @return Application
      */
     public static function getInstance()
@@ -114,7 +124,8 @@ class Container implements ContainerContract
     }
 
     /**
-     * 设置 Container 实例
+     * 设置 Container 实例.
+     *
      * @param ContainerContract $container
      */
     protected function setInstance(ContainerContract $container)
@@ -123,11 +134,13 @@ class Container implements ContainerContract
     }
 
     /**
-     * 反射执行对象的方法
+     * 反射执行对象的方法.
      *
      * @param $object
      * @param $method
+     *
      * @return mixed
+     *
      * @throws ContainerException
      */
     protected function reflectionMethod($object, $method)

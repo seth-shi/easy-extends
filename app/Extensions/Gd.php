@@ -12,5 +12,4 @@ class Gd extends NotDownloadExpand
 {
     // 打开的扩展名
     protected $dllName = 'php_gd2.dll';
-
 }

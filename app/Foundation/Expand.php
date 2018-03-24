@@ -11,27 +11,29 @@ use DavidNineRoc\IniParseRender\Exception\FileNotFoundException;
 use DavidNineRoc\IniParseRender\IniManager;
 use VIPSoft\Unzip\Unzip;
 
-
 class Expand implements ExpandContract
 {
     protected $mapUrl = [];
+
     protected $dllName = '';
+
     /**
      * @var Application
      */
     protected $app;
+
     // 缓存的路径
     protected $cachePath;
 
     public function __construct(Application $app)
     {
         $this->app = $app;
-        $this->cachePath = $this->app->getBasePath()."/bootstrap/cache";
+        $this->cachePath = $this->app->getBasePath().'/bootstrap/cache';
     }
 
     public function installExtend($env)
     {
-        if (! $this->hasExtend($env)) {
+        if (!$this->hasExtend($env)) {
             throw new NotExtensionDirException('There is no environment-compliant version');
         }
 
@@ -48,8 +50,10 @@ class Expand implements ExpandContract
     }
 
     /**
-     * 是否有合适的扩展
+     * 是否有合适的扩展.
+     *
      * @param $env
+     *
      * @return bool
      */
     protected function hasExtend($env)
@@ -58,9 +62,12 @@ class Expand implements ExpandContract
     }
 
     /**
-     * 根据环境变量下载压缩文件夹
+     * 根据环境变量下载压缩文件夹.
+     *
      * @param $env
+     *
      * @return string
+     *
      * @throws DownloadExtensionException
      */
     protected function downloadExtend($env)
@@ -71,8 +78,10 @@ class Expand implements ExpandContract
     }
 
     /**
-     * 解压 zip 文件
+     * 解压 zip 文件.
+     *
      * @param $zipFile
+     *
      * @internal param $zip
      */
     protected function unZipFile($zipFile)
@@ -82,26 +91,27 @@ class Expand implements ExpandContract
     }
 
     /**
-     * 复制 dll 文件到 php 的扩展目录下
+     * 复制 dll 文件到 php 的扩展目录下.
+     *
      * @throws DownloadExtensionException
      * @throws FileNotFoundException
      */
     protected function copyDllToExtPath()
     {
         $dllName = $this->cachePath.'/'.$this->dllName;
-        if (! file_exists($dllName)) {
+        if (!file_exists($dllName)) {
             throw new DownloadExtensionException('Zip file not extension dll');
         }
 
         $dstPath = $this->app->getExtPath().'/'.$this->dllName;
 
-        if (! copy($dllName, $dstPath)) {
+        if (!copy($dllName, $dstPath)) {
             throw new FileNotFoundException("[{$dstPath}] path not write permission");
         }
     }
 
     /**
-     * 开启扩展
+     * 开启扩展.
      */
     protected function openExtend()
     {
@@ -111,11 +121,10 @@ class Expand implements ExpandContract
         $ini = $this->app->make(IniManager::class);
 
         // 如果已经存在了的，不需要开启
-        if (! in_array($this->dllName, $ini->get('PHP', 'extension'))) {
+        if (!in_array($this->dllName, $ini->get('PHP', 'extension'), true)) {
             $ini->set('PHP', 'extension', $this->dllName);
         }
         $ini->write();
-        print "[$this->dllName] extension open success!!!";
+        echo "[$this->dllName] extension open success!!!";
     }
-
 }

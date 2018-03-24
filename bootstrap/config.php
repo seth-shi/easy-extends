@@ -19,5 +19,5 @@ return [
     ],
     [
         'CURLOPT_USERAGENT' => 'Mozilla/5.0 (iPhone; U; CPU like Mac OS X) AppleWebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/4A93 Safari/419.3',
-    ]
+    ],
 ];
