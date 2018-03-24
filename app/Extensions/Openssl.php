@@ -13,7 +13,6 @@ class Openssl extends NotDownloadExpand
     // 打开的扩展名
     protected $dllName = 'php_openssl.dll';
 
-
     protected function getExtendConfig()
     {
         return <<<'config'

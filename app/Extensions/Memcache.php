@@ -3,6 +3,7 @@
 namespace DavidNineRoc\EasyExtends\Extensions;
 
 use DavidNineRoc\EasyExtends\Foundation\Expand;
+
 class Memcache extends Expand
 {
     protected $mapUrl = array(

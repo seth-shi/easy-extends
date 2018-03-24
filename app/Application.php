@@ -7,7 +7,6 @@ use DavidNineRoc\EasyExtends\Kernel\Container;
 use DavidNineRoc\EasyExtends\Kernel\Env;
 use DavidNineRoc\EasyExtends\Kernel\ExceptionHandler;
 
-
 class Application extends Container
 {
     use Env, Command, ExceptionHandler;
@@ -27,24 +26,23 @@ class Application extends Container
             $this->basePath = $basePath;
         }
 
-        /**
+        /*
          * 设置自己为单例，方便调用
          */
         $this->setInstance($this);
 
-        /**
+        /*
          * 注册异常，捕获控制台可能出现的异常
          */
         $this->registerFatalHandler();
 
-        /**
+        /*
          * 加载当前环境变量，包括 php 版本，
          * vc 版本，nts, win 版本
          */
         $this->registerEnv();
         $this->loadCurrentEnv();
     }
-
 
     /**
      * @return string

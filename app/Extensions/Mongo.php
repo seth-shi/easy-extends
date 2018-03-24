@@ -3,6 +3,7 @@
 namespace DavidNineRoc\EasyExtends\Extensions;
 
 use DavidNineRoc\EasyExtends\Foundation\Expand;
+
 class Mongo extends Expand
 {
     protected $mapUrl = array(

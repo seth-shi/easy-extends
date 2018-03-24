@@ -3,6 +3,7 @@
 namespace DavidNineRoc\EasyExtends\Extensions;
 
 use DavidNineRoc\EasyExtends\Foundation\Expand;
+
 class Sqlsrv extends Expand
 {
     protected $mapUrl = array(

@@ -2,22 +2,24 @@
 
 namespace DavidNineRoc\EasyExtends\Support;
 
-
 use DavidNineRoc\EasyExtends\Application;
 
 class Config
 {
     protected $config;
+
     protected static $instance;
 
     public function __construct(Application $app)
     {
-        $this->config = require $app->getBasePath() . '/bootstrap/config.php';
+        $this->config = require $app->getBasePath().'/bootstrap/config.php';
     }
 
     /**
-     * a static function
+     * a static function.
+     *
      * @static
+     *
      * @return array
      */
     protected function get($key = null, $default = null)

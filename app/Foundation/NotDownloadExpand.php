@@ -2,7 +2,6 @@
 
 namespace DavidNineRoc\EasyExtends\Foundation;
 
-
 class NotDownloadExpand extends Expand
 {
     protected function hasExtend($env)

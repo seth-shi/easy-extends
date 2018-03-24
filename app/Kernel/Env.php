@@ -5,7 +5,6 @@ namespace DavidNineRoc\EasyExtends\Kernel;
 use DavidNineRoc\EasyExtends\Exception\ConfigException;
 use DavidNineRoc\EasyExtends\Exception\NotExtensionDirException;
 
-
 trait Env
 {
     // 扩展目录
@@ -28,7 +27,7 @@ trait Env
 
     /**
      * 脚本下的运行注册几个还几个变量
-     * 内存大小限制开大点
+     * 内存大小限制开大点.
      */
     protected function registerEnv()
     {
@@ -36,7 +35,7 @@ trait Env
     }
 
     /**
-     * 加载当前环境变量，包括 php 版本，
+     * 加载当前环境变量，包括 php 版本，.
      */
     protected function loadCurrentEnv()
     {
@@ -49,7 +48,7 @@ trait Env
 
     /**
      * 检查 php.ini 是否有配置.
-     * 扩展目录是否已经可以读取
+     * 扩展目录是否已经可以读取.
      *
      * @throws ConfigException
      */
