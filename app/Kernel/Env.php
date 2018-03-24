@@ -81,9 +81,8 @@ trait Env
     {
         $config = $this->getPHPInfoArray();
 
-
         // Architecture == X86
-        if (! array_key_exists('Architecture', $config)) {
+        if (!array_key_exists('Architecture', $config)) {
             throw new ConfigException('phpinfo Architecture information exception');
         }
 

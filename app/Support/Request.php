@@ -4,11 +4,9 @@ namespace DavidNineRoc\EasyExtends\Support;
 
 use Dariuszp\CliProgressBar;
 use DavidNineRoc\EasyExtends\Exception\DownloadExtensionException;
-use Monolog\Logger;
 
 class Request
 {
-
     /**
      * @var CliProgressBar
      */
