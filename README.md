@@ -23,7 +23,7 @@
 | environment  |                    | update php.ini |            |    list    |
 +--------------+                    +----------------+            +------------+
 ```
-![下载redis](http://or2pofbfh.bkt.clouddn.com/github/easy_extends_down_redis.gif)
+![下载redis](media/redis.gif)
 
 ## Requirement
 1. PHP >= 5.3
@@ -49,7 +49,7 @@ php index
 
 // 如果写入失败, 请回滚 php.ini 文件
 php install rollback
-```    
+```
 ## Support
 * curl
 * fileinfo
